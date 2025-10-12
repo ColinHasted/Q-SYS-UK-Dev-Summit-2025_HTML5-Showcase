@@ -1,0 +1,142 @@
+// dynamic Knob with Scale - Professional Black Style
+.dynamic-knob {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+
+  &__wrapper {
+    position: relative;
+    width: 1.4rem;
+    height: 1.4rem;
+    cursor: pointer;
+    outline: none;
+    border-radius: 50%;
+
+    &:focus-visible {
+      box-shadow: 0 0 0 0.1rem rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  &__scale {
+    position: absolute;
+    inset: -0.35rem;
+    pointer-events: none;
+  }
+
+  &__mark {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 0.04rem;
+    height: 0.2rem;
+    background: rgba(0, 0, 0, 0.8);
+    margin-left: -0.02rem;
+    transform-origin: 50% 1.05rem;
+
+    // Major tick marks (with labels)
+    &--major {
+      height: 0.25rem;
+      width: 0.06rem;
+      margin-left: -0.03rem;
+      background: rgba(0, 0, 0, 0.9);
+    }
+  }
+
+  &__mark-label {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0) rotate(var(--counter-rotate, 0deg));
+    white-space: nowrap;
+    font-size: 0.25rem;
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 600;
+    pointer-events: none;
+    top: -0.45rem;
+  text-shadow: 0 0.03125rem 0 rgba(255, 255, 255, 0.2);
+  }
+
+  &__container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+
+    // Keep the existing knob cap style - professional black with metallic ring
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.2), transparent 45%),
+      radial-gradient(ellipse at 70% 80%, rgba(0, 0, 0, 0.15), transparent 45%),
+      linear-gradient(145deg, #404040, #353535 30%, #2a2a2a 70%, #1f1f1f);
+
+    box-shadow:
+      inset 0 .08rem .15rem rgba(255, 255, 255, 0.2),
+      inset 0 -.08rem .15rem rgba(0, 0, 0, 0.4),
+      inset .06rem 0 .12rem rgba(255, 255, 255, 0.1),
+      inset -.06rem 0 .12rem rgba(0, 0, 0, 0.2),
+      0 .15rem .3rem rgba(0, 0, 0, 0.3);
+
+    // Metallic ring effect
+    &::before {
+      content: '';
+      position: absolute;
+      inset: .05rem;
+      border-radius: 50%;
+      background:
+        linear-gradient(135deg,
+          rgba(180, 180, 180, 0.4) 0%,
+          rgba(100, 100, 100, 0.6) 25%,
+          rgba(60, 60, 60, 0.8) 50%,
+          rgba(40, 40, 40, 0.9) 75%,
+          rgba(20, 20, 20, 1) 100%
+        );
+      box-shadow:
+        inset 0 .04rem .08rem rgba(255, 255, 255, 0.3),
+        inset 0 -.04rem .08rem rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  &__indicator {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: .08rem;
+    height: .5rem;
+    background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(180,180,180,0.8));
+    transform-origin: 50% 100%;
+    margin-left: -.04rem;
+    margin-top: -.5rem;
+    border-radius: .02rem;
+    box-shadow: 0 .02rem .06rem rgba(0,0,0,0.6);
+    z-index: 10;
+  }
+
+  &__label {
+    margin-top: 0.4rem;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.35rem;
+    font-weight: bold;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-shadow: 0 0.03125rem 0 rgba(255, 255, 255, 0.3);
+    text-align: center;
+  }
+}
+
+// Counter-rotation for labels to keep them upright
+.dynamic-knob__mark[style*="rotate(-135deg)"] .dynamic-knob__mark-label {
+  --counter-rotate: 135deg;
+}
+
+.dynamic-knob__mark[style*="rotate(0deg)"] .dynamic-knob__mark-label {
+  --counter-rotate: 0deg;
+}
+
+.dynamic-knob__mark[style*="rotate(135deg)"] .dynamic-knob__mark-label {
+  --counter-rotate: -135deg;
+}
+
+// Special positioning for center label
+.dynamic-knob__mark--center .dynamic-knob__mark-label {
+  top: -0.5rem;
+}

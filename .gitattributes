@@ -1,0 +1,3 @@
+# Treat Q-SYS design files as binary to avoid EOL/text diffs
+# This prevents Git from trying to perform text diff/EOL normalization on .qsys files
+*.qsys binary

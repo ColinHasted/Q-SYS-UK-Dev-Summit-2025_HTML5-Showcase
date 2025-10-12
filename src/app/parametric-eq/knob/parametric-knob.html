@@ -1,0 +1,64 @@
+<div class="parametric-knob" [class.parametric-knob--large]="size() === 'large'">
+  <div
+    class="parametric-knob__wrapper"
+    tabindex="0"
+    [attr.aria-label]="label()"
+    (pointerdown)="onPointerDown($event)"
+    (keydown)="onKeydown($event)"
+  >
+    <div class="parametric-knob__scale">
+      <div
+        class="parametric-knob__mark parametric-knob__mark--major"
+        style="transform: rotate(-135deg)"
+      >
+        <span class="parametric-knob__mark-label">{{ minLabel() }}</span>
+      </div>
+      <div
+        class="parametric-knob__mark"
+        style="transform: rotate(-108deg)"
+      ></div>
+      <div
+        class="parametric-knob__mark"
+        style="transform: rotate(-81deg)"
+      ></div>
+      <div
+        class="parametric-knob__mark"
+        style="transform: rotate(-54deg)"
+      ></div>
+      <div
+        class="parametric-knob__mark"
+        style="transform: rotate(-27deg)"
+      ></div>
+      <div
+        class="parametric-knob__mark"
+        [class.parametric-knob__mark--major]="centerLabel()"
+        [class.parametric-knob__mark--center]="centerLabel()"
+        style="transform: rotate(0deg)"
+      >
+      @if(centerLabel()){
+        <span class="parametric-knob__mark-label">{{ centerLabel() }}</span>
+      }
+      </div>
+      <div class="parametric-knob__mark" style="transform: rotate(27deg)"></div>
+      <div class="parametric-knob__mark" style="transform: rotate(54deg)"></div>
+      <div class="parametric-knob__mark" style="transform: rotate(81deg)"></div>
+      <div
+        class="parametric-knob__mark"
+        style="transform: rotate(108deg)"
+      ></div>
+      <div
+        class="parametric-knob__mark parametric-knob__mark--major"
+        style="transform: rotate(135deg)"
+      >
+        <span class="parametric-knob__mark-label">{{ maxLabel() }}</span>
+      </div>
+    </div>
+    <div class="parametric-knob__container">
+      <div
+        class="parametric-knob__indicator"
+        [style.transform]="indicatorRotation()"
+      ></div>
+    </div>
+  </div>
+  <div class="parametric-knob__label">{{ label() }}</div>
+</div>

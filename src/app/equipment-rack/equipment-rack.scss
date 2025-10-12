@@ -1,0 +1,223 @@
+@use 'variables' as *;
+
+$bevel-hi: rgba(255, 255, 255, .14);
+$bevel-lo: rgba(0, 0, 0, .70);
+
+$wood-base: #0e1116;
+$wood-deep: #0a0c10;
+$wood-warm: #181311;
+
+$grain-fine: repeating-linear-gradient(90deg,
+    rgba(255, 255, 255, .025) 0 0.0625rem,
+    transparent 0.0625rem 0.375rem);
+$grain-coarse: repeating-linear-gradient(86deg,
+    rgba(255, 255, 255, .015) 0 0.125rem,
+    transparent 0.125rem 0.75rem);
+$warm-tint: linear-gradient(90deg, rgba(92, 72, 56, .06), rgba(0, 0, 0, 0) 45%, rgba(92, 72, 56, .04) 80%);
+
+
+
+.equipment-rack {
+  display: grid;
+  grid-template-columns: 2rem $rack-width 2rem;
+  grid-template-rows: 2.9rem calc(var(--units) * $rack-unit) 2.5rem;
+
+  &__side-panel {
+    position: relative;
+    border-radius: 0.25rem;
+    /* Layered wood finish */
+    background:
+      /* panel-wide bevel highlight/shadow */
+      linear-gradient(180deg, $bevel-hi, transparent 38%, transparent 62%, $bevel-lo),
+      /* subtle inner vignette */
+      radial-gradient(140% 85% at 50% 20%, rgba(255, 255, 255, .05), transparent 40%),
+      radial-gradient(130% 95% at 50% 120%, rgba(0, 0, 0, .45), transparent 50%),
+      /* two grain passes + warm tint */
+      $grain-fine,
+      $grain-coarse,
+      $warm-tint,
+      /* base body */
+      linear-gradient(180deg, $wood-base, $wood-deep);
+    background-blend-mode: normal, soft-light, multiply, overlay, overlay, color-burn, normal;
+    box-shadow:
+      inset 0 0.0625rem 0 rgba(255, 255, 255, .06),
+      inset 0 -0.0625rem 0 rgba(0, 0, 0, .65),
+      inset 0 0 3.75rem rgba(0, 0, 0, .35);
+
+    &--top {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, .10), transparent 65%),
+        $grain-fine, $grain-coarse, $warm-tint,
+        linear-gradient(180deg, $wood-base, $wood-deep);
+      background-blend-mode: normal, overlay, overlay, color-burn, normal;
+      grid-row: 1;
+      grid-column: 1 / 4;
+    }
+
+    &--bottom {
+      background-image:
+        linear-gradient(to top,
+          #151515 0%,
+          #1d1d1d 6%,
+          #121212 10%,
+          #0b0b0b 100%),
+        repeating-linear-gradient(90deg,
+          rgba(255, 255, 255, .02) 0,
+          rgba(255, 255, 255, .02) 0.125rem,
+          transparent 0.125rem,
+          transparent 0.375rem);
+      grid-row: 3;
+      grid-column: 1 / 4;
+    }
+
+    &--left {
+      background:
+        linear-gradient(90deg, rgba(0, 0, 0, .70), transparent 65%),
+        $grain-fine, $grain-coarse, $warm-tint,
+        linear-gradient(180deg, $wood-base, $wood-deep);
+      background-blend-mode: normal, overlay, overlay, color-burn, normal;
+      border-radius: 0.25rem 0 0 0.25rem;
+      grid-row: 2;
+      grid-column: 1;
+    }
+
+    &--right {
+      background:
+        linear-gradient(270deg, rgba(255, 255, 255, .10), transparent 65%),
+        $grain-fine, $grain-coarse, $warm-tint,
+        linear-gradient(180deg, $wood-base, $wood-deep);
+      background-blend-mode: normal, overlay, overlay, color-burn, normal;
+      border-radius: 0 0.25rem 0.25rem 0;
+      grid-row: 2;
+      grid-column: 3;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, .06), transparent 20%),
+        linear-gradient(0deg, rgba(0, 0, 0, .25), transparent 25%);
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    top: 0.5rem;
+    right: 2rem;
+    width: 5.5rem;
+    height: 1.8rem;
+
+    background:
+      linear-gradient(162deg,
+        rgba(255, 255, 255, 0.6) 0%,
+        rgba(255, 255, 255, 0.4) 20%,
+        rgba(190, 190, 190, 0.1) 40%,
+        transparent 60%,
+        rgba(0, 0, 0, 0.1) 80%,
+        rgba(0, 0, 0, 0.3) 100%),
+      linear-gradient(145deg, #e8e9ea, #babcbe);
+
+    border: 0.0625rem solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.3rem;
+
+    box-shadow:
+      inset 0 0.15rem 0.3rem rgba(255, 255, 255, 0.8),
+      inset 0 -0.08rem 0.15rem rgba(0, 0, 0, 0.15),
+      0 0.15rem 0.3rem rgba(0, 0, 0, 0.3),
+      0 0.3rem 0.6rem rgba(0, 0, 0, 0.2),
+      0 0.08rem 0 rgba(255, 255, 255, 0.5);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem 0.4rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        repeating-linear-gradient(45deg,
+          transparent 0,
+          rgba(255, 255, 255, 0.04) 0.03125rem,
+          transparent 0.0625rem),
+        repeating-linear-gradient(-45deg,
+          transparent 0,
+          rgba(255, 255, 255, 0.02) 0.03125rem,
+          transparent 0.0625rem);
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0.1rem;
+      left: 0.1rem;
+      right: 45%;
+      height: 50%;
+      background: linear-gradient(135deg,
+          rgba(255, 255, 255, 0.6) 0%,
+          rgba(255, 255, 255, 0.3) 30%,
+          rgba(255, 255, 255, 0.1) 60%,
+          transparent 100%);
+      border-radius: 0.2rem 0.6rem 0.4rem 0.1rem;
+      pointer-events: none;
+    }
+
+    &__logo {
+      width: 4.5rem;
+      height: auto;
+      opacity: 0.9;
+      filter: drop-shadow(0 0.0625rem 0.4rem rgba(0, 0, 0, .3));
+      z-index: 1;
+      position: relative;
+    }
+  }
+
+
+  &__bay {
+    position: relative;
+    display: grid;
+    grid-template-columns: $rail-width 1fr $rail-width;
+    grid-auto-rows: 1fr;
+    align-items: stretch;
+    grid-column: 2;
+    grid-row: 2;
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+
+    >app-rack-rails[side="left"] {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    >app-rack-rails[side="right"] {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    &--equipment {
+      grid-column: 1 / 4;
+      grid-row: 1;
+      container-type: inline-size;
+      flex: 1 1 auto;
+      height: 100%;
+      display: grid;
+      grid-template-rows: repeat(var(--units), $rack-unit);
+      overflow: hidden;
+      align-content: start;
+      justify-items: stretch;
+      z-index: 3;
+    }
+  }
+}
+
+
+

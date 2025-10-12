@@ -1,0 +1,108 @@
+.led-meter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+
+  .led-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.35rem;
+    font-weight: bold;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0.0625rem 0 rgba(255, 255, 255, 0.3);
+    margin-bottom: 0.1rem;
+  }
+
+  .led-segments {
+    display: flex;
+    flex-direction: row;
+    gap: 0.0625rem;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 0.125rem;
+    padding: 0.125rem;
+    box-shadow:
+      inset 0 0.125rem 0.25rem rgba(0, 0, 0, 0.6),
+      inset 0 -0.0625rem 0.125rem rgba(255, 255, 255, 0.1);
+  }
+
+  .led-segment {
+    height: 100%;
+    border-radius: 0.0625rem;
+    background: rgba(100, 100, 100, 0.3);
+    transition: all 0.1s ease;
+    flex: 1;
+
+    // Inactive state - dim background
+    &:not(.active) {
+      background: rgba(80, 80, 80, 0.3);
+      box-shadow: inset 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.4);
+    }
+
+    // Active states with colors
+    &.active {
+      &.green {
+        background: linear-gradient(90deg, #00ff00, #00cc00);
+        box-shadow:
+          0 0 0.1875rem rgba(0, 255, 0, 0.6),
+          inset 0 0.0625rem 0.0625rem rgba(255, 255, 255, 0.3);
+      }
+
+      &.yellow {
+        background: linear-gradient(90deg, #ffff00, #cccc00);
+        box-shadow:
+          0 0 0.1875rem rgba(255, 255, 0, 0.6),
+          inset 0 0.0625rem 0.0625rem rgba(255, 255, 255, 0.3);
+      }
+
+      &.red {
+        background: linear-gradient(90deg, #ff0000, #cc0000);
+        box-shadow:
+          0 0 0.1875rem rgba(255, 0, 0, 0.6),
+          inset 0 0.0625rem 0.0625rem rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+
+  .led-scale {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 0.1rem;
+    position: relative;
+
+    .scale-mark {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.3rem;
+      font-weight: bold;
+      color: #000000;
+      opacity: 0.7;
+      text-shadow: 0 0.0625rem 0 rgba(255, 255, 255, 0.2);
+      position: absolute;
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+  }
+}
+
+// Compact variants for smaller spaces
+.led-meter.compact {
+  .led-segments {
+    padding: 0.0625rem;
+  }
+
+  .led-segment {
+    border-radius: 0.03125rem;
+  }
+
+  .led-label {
+    font-size: 0.3rem;
+  }
+
+  .scale-mark {
+    font-size: 0.25rem;
+  }
+}

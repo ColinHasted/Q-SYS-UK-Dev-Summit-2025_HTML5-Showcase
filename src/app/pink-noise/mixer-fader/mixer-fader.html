@@ -1,0 +1,57 @@
+<div class="mixer-fader">
+  <div class="mixer-fader__container">
+    <div class="mixer-fader__scale">
+      <!-- Major ticks (top) -->
+      @for (tick of majorTicks; track tick.position) {
+        <div class="mixer-fader__scale-tick mixer-fader__scale-tick--major mixer-fader__scale-tick--top"
+             [style.left.%]="tick.position"></div>
+      }
+
+      <!-- Minor ticks (top) -->
+      @for (tick of minorTicks; track tick.position) {
+        <div class="mixer-fader__scale-tick mixer-fader__scale-tick--minor mixer-fader__scale-tick--top"
+             [style.left.%]="tick.position"></div>
+      }
+
+      <!-- Micro ticks (top) -->
+      @for (tick of microTicks; track tick.position) {
+        <div class="mixer-fader__scale-tick mixer-fader__scale-tick--micro mixer-fader__scale-tick--top"
+             [style.left.%]="tick.position"></div>
+      }
+
+      <!-- Major ticks (bottom) -->
+      @for (tick of majorTicks; track tick.position) {
+        <div class="mixer-fader__scale-tick mixer-fader__scale-tick--major mixer-fader__scale-tick--bottom"
+             [style.left.%]="tick.position"></div>
+      }
+
+      <!-- Minor ticks (bottom) -->
+      @for (tick of minorTicks; track tick.position) {
+        <div class="mixer-fader__scale-tick mixer-fader__scale-tick--minor mixer-fader__scale-tick--bottom"
+             [style.left.%]="tick.position"></div>
+      }
+
+      <!-- Micro ticks (bottom) -->
+      @for (tick of microTicks; track tick.position) {
+        <div class="mixer-fader__scale-tick mixer-fader__scale-tick--micro mixer-fader__scale-tick--bottom"
+             [style.left.%]="tick.position"></div>
+      }
+
+      <!-- Labels -->
+      @for (label of scaleLabels; track label.position) {
+        <div class="mixer-fader__scale-label" [style.left.%]="label.position">{{ label.text }}</div>
+      }
+    </div>
+
+    <div class="mixer-fader__track">
+      <input type="range"
+             class="mixer-fader__input"
+             [min]="min()"
+             [max]="max()"
+             [step]="step()"
+             [value]="value()"
+             [disabled]="disabled()"
+             (input)="onInputChange($event)" />
+    </div>
+  </div>
+</div>

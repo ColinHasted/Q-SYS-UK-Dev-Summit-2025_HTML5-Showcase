@@ -1,0 +1,19 @@
+<div class="equipment-rack" [style.--units]="units()">
+  <div class="equipment-rack__side-panel equipment-rack__side-panel--top">
+    <div class="equipment-rack__badge">
+      <img class="equipment-rack__badge__logo" src="/assets/images/logo/q-sys-logo.svg">
+    </div>
+  </div>
+  
+  <div class="equipment-rack__side-panel equipment-rack__side-panel--left"></div>
+  <div class="equipment-rack__side-panel equipment-rack__side-panel--right"></div>
+  <div class="equipment-rack__side-panel equipment-rack__side-panel--bottom"></div>
+
+  <div class="equipment-rack__bay">
+    <app-rack-rails [units]="units()" side="left"></app-rack-rails>
+    <app-rack-rails [units]="units()" side="right"></app-rack-rails>
+    <div class="equipment-rack__bay--equipment">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,163 @@
+<div class="parametric-eq" [attr.data-rack-units]="2">
+  <div class="parametric-eq__rack-ear parametric-eq__rack-ear--left">
+    <app-rack-screw></app-rack-screw>
+    <div class="parametric-eq__rack-ear__label">PARAMETRIC EQ-SYS</div>
+    <app-rack-screw></app-rack-screw>
+  </div>
+
+  <div class="parametric-eq__chassis">
+    <div class="parametric-eq__master-controls">
+      <app-parametric-knob
+        label="GAIN"
+        minLabel="-20"
+        centerLabel="0"
+        maxLabel="20"
+        [value]="ParametricEqualizer.gain()"
+        [min]="-20"
+        [max]="20"
+        [step]="0.5"
+        size="large"
+        (valueChange)="ParametricEqualizer.SetGain($event)"
+      ></app-parametric-knob>
+
+      <div class="parametric-eq__master-controls__buttons">
+        <!-- Control Buttons -->
+        <button
+          class="control-button control-button--bypass"
+          [class.control-button--active]="ParametricEqualizer.bypass()"
+          (click)="ParametricEqualizer.ToggleBypass()"
+        >
+          <div class="control-button__led"></div>
+          <span>BYPASS</span>
+        </button>
+
+        <button
+          class="control-button control-button--invert"
+          [class.control-button--active]="ParametricEqualizer.invert()"
+          (click)="ParametricEqualizer.ToggleInvert()"
+        >
+          <div class="control-button__led"></div>
+          <span>INVERT</span>
+        </button>
+
+        <button
+          class="control-button control-button--mute"
+          [class.control-button--active]="ParametricEqualizer.mute()"
+          (click)="ParametricEqualizer.ToggleMute()"
+        >
+          <div class="control-button__led"></div>
+          <span>MUTE</span>
+        </button>
+      </div>
+    </div>
+    <div class="parametric-eq__chart-window">
+      <canvas
+        class="parametric-eq__chart-window__canvas"
+        id="responseGraph"
+      ></canvas>
+    </div>
+    <div class="eq-section">
+      @for (band of ParametricEqualizer.EQBands; track band; let i = $index) {
+      @if(i >0){
+      <div class="eq-section--separator"></div>
+      }
+      <div class="eq-section__band">
+        <app-parametric-knob
+          label="GAIN"
+          minLabel="-20"
+          centerLabel="0"
+          maxLabel="20"
+          [value]="band.Gain()"
+          [min]="-20"
+          [max]="20"
+          [step]="0.01"
+          (valueChange)="updateBandGain(i, $event)"
+        ></app-parametric-knob>
+
+        <app-parametric-knob
+          label="FREQ"
+          minLabel="20"
+          maxLabel="20K"
+          [value]="band.FrequencyPosition()"
+          [min]="0"
+          [max]="1"
+          [step]="0.001"
+          [sensitivity]="0.002"
+          (valueChange)="updateBandFreq(i, $event)"
+        ></app-parametric-knob>
+        <app-parametric-knob
+          label="WIDTH"
+          minLabel="0.01"
+          maxLabel="10"
+          [value]="band.BandwidthPosition()"
+          [min]="0"
+          [max]="1"
+          [step]="0.001"
+          [sensitivity]="0.002"
+          (valueChange)="updateBandWidth(i, $event)"
+        ></app-parametric-knob>
+
+        <button
+          class="band-bypass"
+          [class.active]="band.Bypass()"
+          (click)="toggleBandBypass(i)"
+        >
+          <div class="bypass-led" [class.on]="band.Bypass()"></div>
+          <span>BYPASS</span>
+        </button>
+
+        <div class="filter-type-selector">
+          <div class="filter-type-label">TYPE</div>
+          <div class="filter-switches">
+            <button
+              class="filter-switch"
+              [class.active]="ParametricEqualizer.EQBands[i].Type() === 2"
+              (click)="ParametricEqualizer.setFilterType(i, 2)"
+              title="Low Shelf"
+            >
+              <img
+                src="/assets/icons/filters/low-shelf.svg"
+                alt="Low Shelf"
+                class="filter-icon"
+              />
+            </button>
+            <button
+              class="filter-switch"
+              [class.active]="ParametricEqualizer.EQBands[i].Type() === 1"
+              (click)="ParametricEqualizer.setFilterType(i, 1)"
+              title="Parametric"
+            >
+              <img
+                src="/assets/icons/filters/bell.svg"
+                alt="Parametric (Bell)"
+                class="filter-icon"
+              />
+            </button>
+            <button
+              class="filter-switch"
+              [class.active]="ParametricEqualizer.EQBands[i].Type() === 3"
+              (click)="ParametricEqualizer.setFilterType(i, 3)"
+              title="High Shelf"
+            >
+              <img
+                src="/assets/icons/filters/high-shelf.svg"
+                alt="High Shelf"
+                class="filter-icon"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+
+  <div class="parametric-eq__rack-ear parametric-eq__rack-ear--right">
+    <img
+      class="parametric-eq__rack-ear__logo"
+      src="/assets/images/logo/q-sys-emblem-white.svg"
+    />
+    <app-rack-screw></app-rack-screw>
+    <app-rack-screw></app-rack-screw>
+  </div>
+</div>

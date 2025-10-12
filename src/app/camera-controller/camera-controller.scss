@@ -1,0 +1,362 @@
+@use 'variables'as *;
+
+.camera-controller {
+  background:
+    radial-gradient(110% 140% at 10% 10%, rgba(255, 255, 255, .06), transparent 60%),
+    radial-gradient(120% 140% at 90% 20%, rgba(255, 255, 255, .05), transparent 60%),
+    radial-gradient(140% 160% at 20% 80%, rgba(0, 0, 0, .22), transparent 60%),
+    linear-gradient(170deg, #6b7076, #4e5359 38%, #3e4348 60%, #5a6066 100%);
+  border-radius: .5rem;
+  box-shadow:
+    inset 0 0.125rem 0 rgba(255, 255, 255, .08),
+    inset 0 -0.125rem 0 rgba(0, 0, 0, .35),
+    0 1.125rem 2.5rem rgba(0, 0, 0, .6);
+  display: flex;
+  flex-direction: row;
+  height: calc($rack-unit * 2);
+  position: relative;
+  width: $rack-width;
+
+  &__rack-ear {
+    display: flex;
+    flex-direction: column;
+    height: calc($rack-unit * 2);
+    justify-content: space-between;
+    padding: calc(0.25rem - $screw-radius);
+    position: relative;
+
+    &--left {
+      align-items: flex-start;
+      padding-left: calc($rail-centerline - $screw-radius);
+    }
+
+    &--right {
+      align-items: flex-end;
+      padding-right: calc($rail-centerline - $screw-radius);
+    }
+        &__logo {
+      height: auto;
+      opacity: 0.70;
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2rem;
+      filter:brightness(0.4);
+    }
+  }
+
+  &__chassis {
+    align-items: center;
+    display: flex;
+    flex: 1 1 auto;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+
+  &__lcd-window {
+    flex: 0 0 auto;
+    width: 16.8rem;
+
+    &--lcd-frame {
+      aspect-ratio: 16 / 9;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 40%, transparent 60%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(145deg, #2a2a2a, #1a1a1a);
+      border-radius: .25rem;
+      box-shadow:
+        inset 0 .15rem .4rem rgba(0, 0, 0, 0.8),
+        inset 0 -.08rem .2rem rgba(255, 255, 255, 0.05),
+        0 .01rem .1rem rgba(255, 255, 255, 0.2);
+      padding: .3rem;
+      position: relative;
+      width: 100%;
+    }
+
+    &__screen {
+      border-radius: .1rem;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+
+      &--img {
+        box-shadow: inset 0 0 1rem rgba(0, 0, 0, 11);
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0.35;
+        mix-blend-mode: multiply;
+        background: linear-gradient(160deg, rgba(255, 255, 255, 0.3) 0%, transparent 30%, transparent 50%, rgba(0, 0, 0, 0.5) 100%);
+      }
+    }
+  }
+
+  &__controls {
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    gap: 1rem;
+    justify-content: space-evenly;
+    padding: 0.0rem 0.2rem;
+
+    &__group {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      padding: 0.0rem 0.2rem;
+
+      &--label {
+        color: rgba(0, 0, 0, 0.8);
+        font-size: 0.6rem;
+        font-weight: 500;
+
+        text-align: center;
+        letter-spacing: 0.08rem;
+        text-shadow:
+          0 0.02rem 0.04rem rgba(255, 255, 255, 0.3),
+          0 -0.02rem 0.04rem rgba(0, 0, 0, 0.8);
+        filter: contrast(1.2);
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  &__ptz-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0.15rem;
+  }
+}
+
+
+
+
+.section-label {
+  font-family: 'Arial', sans-serif;
+  font-size: 0.4rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+  margin-bottom: 0.2rem;
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+  /* Subtle engraved effect matching audio analyser */
+  text-shadow:
+    0 0.02rem 0.04rem rgba(255, 255, 255, 0.3),
+    0 -0.02rem 0.04rem rgba(0, 0, 0, 0.8);
+}
+
+
+
+/* Zoom & Focus Layout */
+.zoom-focus-controls {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.zoom-section,
+.focus-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: fit-content;
+}
+
+/* Preset Controls Layout */
+.preset-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0.12rem;
+  align-items: center;
+  justify-items: center;
+}
+
+/* Modifier Controls Layout - Column */
+.modifier-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.modifier-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  min-width: fit-content;
+}
+
+/* Camera Buttons - Graphic EQ Style */
+.camera-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  background: linear-gradient(180deg, #3a3a3a, #1a1a1a);
+  border: .08rem solid rgba(0, 0, 0, 0.7);
+  border-radius: .2rem;
+  color: rgba(255,255,255,0.8);
+  font-size: .6rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  box-shadow: inset 0 .06rem .12rem rgba(255, 255, 255, 0.1), inset 0 -.06rem .12rem rgba(0, 0, 0, 0.4), 0 .04rem .08rem rgba(0, 0, 0, 0.4);
+
+  &--center {
+  background: linear-gradient(180deg, #424242, #222222);
+
+  &:active {
+        transform: scale(.95);
+    background: linear-gradient(180deg, #323232, #121212);
+  }
+}
+
+  /* Icon styling */
+  img {
+    width: 45%;
+    height: auto;
+    opacity: 0.8;
+    filter: brightness(0.9) contrast(1.1);
+    transition: all 0.1s ease;
+  }
+
+  &:active,
+  &--active {
+    background: linear-gradient(180deg, #2a2a2a, #0a0a0a);
+    box-shadow: inset 0 .04rem .08rem rgba(0, 0, 0, 0.6), inset 0 -.02rem .04rem rgba(255, 255, 255, 0.05), 0 .02rem .04rem rgba(0, 0, 0, 0.3);
+
+  }
+}
+
+
+
+.camera-btn--function {
+  width: 2.4rem;
+  height: 1.8rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02rem;
+}
+
+.camera-btn--preset {
+  width: 2.2rem;
+  height: 2.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.02rem;
+}
+
+.camera-btn--auto {
+  width: 2.6rem;
+  height: 1.6rem;
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.08rem;
+  position: relative;
+  background: linear-gradient(180deg, #3a3a3d, #1a1a1d);
+
+  &:active {
+    background: linear-gradient(180deg, #2a2a2d, #0a0a0d);
+  }
+
+}
+
+.camera-btn--modifier {
+  width: 2.6rem;
+  height: 2.6rem;
+  position: relative;
+
+  img {
+    width: 50%;
+  }
+
+  /* LED indicator - default off state */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0.2rem;
+    left: 0.2rem;
+    width: 0.3rem;
+    height: 0.3rem;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #2a2a2a, #1a1a1a);
+    box-shadow: inset 0 0 .06rem rgba(0, 0, 0, 0.8);
+    transition: all 0.2s ease;
+  }
+}
+
+/* Active States for Button Variants - Match Graphic EQ Style */
+.camera-btn--preset.active,
+.camera-btn--modifier.active,
+.camera-btn--auto.active {
+  background: linear-gradient(180deg, #2a2a2a, #0a0a0a);
+  box-shadow: inset 0 .04rem .08rem rgba(0, 0, 0, 0.6), inset 0 -.02rem .04rem rgba(255, 255, 255, 0.05), 0 .02rem .04rem rgba(0, 0, 0, 0.3);
+  transform: scale(.99);
+}
+
+/* Auto Framing - Green LED when active */
+.camera-btn--modifier[aria-label="Toggle Auto Framing"].active::before {
+  background: radial-gradient(circle at 30% 30%, #00ff88, #00cc66, #009944);
+  box-shadow:
+    inset 0 0 .06rem rgba(255, 255, 255, 0.3),
+    0 0 .4rem rgba(0, 255, 136, 0.6),
+    0 0 .8rem rgba(0, 255, 136, 0.3);
+}
+
+/* Privacy - Red LED when active */
+.camera-btn--modifier[aria-label="Toggle Privacy Mode"].active::before {
+  background: radial-gradient(circle at 30% 30%, #ff4444, #cc2222, #991111);
+  box-shadow:
+    inset 0 0 .06rem rgba(255, 255, 255, 0.3),
+    0 0 .4rem rgba(255, 68, 68, 0.6),
+    0 0 .8rem rgba(255, 68, 68, 0.3);
+}
+
+/* Auto Focus - Green LED when active */
+.camera-btn--auto.active::before {
+  content: '';
+  position: absolute;
+  top: 0.15rem;
+  left: 0.15rem;
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #00ff88, #00cc66, #009944);
+  box-shadow:
+    inset 0 0 .06rem rgba(255, 255, 255, 0.3),
+    0 0 .3rem rgba(0, 255, 136, 0.6),
+    0 0 .6rem rgba(0, 255, 136, 0.3);
+  transition: all 0.2s ease;
+}
+
+
+
+.rack-fixings {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+

@@ -1,0 +1,19 @@
+<div class="vent-plate" role="img" aria-label="1U vent panel">
+  <div class="vent-plate__rack-ear vent-plate__rack-ear--left">
+    <app-rack-screw></app-rack-screw>
+    <app-rack-screw></app-rack-screw>
+  </div>
+  <div class="vent-plate__slats">
+        @for (col of columns; track $index) {
+      <div class="vent-plate__slats__column">
+        @for (vent of vents; track $index) {
+          <span class="vent-plate__slats__vent"></span>
+        }
+      </div>
+    }
+  </div>
+  <div class="vent-plate__rack-ear vent-plate__rack-ear--right">
+    <app-rack-screw></app-rack-screw>
+    <app-rack-screw></app-rack-screw>
+  </div>
+</div>

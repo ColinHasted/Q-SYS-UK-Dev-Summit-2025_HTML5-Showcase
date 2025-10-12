@@ -1,0 +1,206 @@
+@use 'variables' as *;
+
+.parametric-knob {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .2rem;
+  margin: .1rem 0;
+
+  &__wrapper {
+    position: relative;
+    width: 1.4rem;
+    height: 1.4rem;
+    cursor: pointer;
+    touch-action: none;
+    -ms-touch-action: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  &__container {
+    position: relative;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 50%),
+      radial-gradient(circle at 70% 70%, rgba(0,0,0,0.4), transparent 50%),
+      linear-gradient(145deg, #3a3a3a, #2a2a2a 60%, #1a1a1a);
+    box-shadow:
+      inset 0 0.06rem 0.15rem rgba(255,255,255,0.15),
+      inset 0 -0.06rem 0.15rem rgba(0,0,0,0.7),
+      0 0.06rem 0.15rem rgba(0,0,0,0.4);
+    border: .01rem solid rgba(0, 0, 0, 0.2);
+
+    /* Add subtle machined texture */
+    &::after {
+      content: '';
+      position: absolute;
+      inset: .05rem;
+      border-radius: 50%;
+      background:
+        repeating-conic-gradient(
+          from 0deg at 50% 50%,
+          transparent 0deg,
+          rgba(255, 255, 255, 0.02) 1deg,
+          transparent 2deg
+        );
+      pointer-events: none;
+    }
+  }
+
+  // Large variant styling (graphic EQ style with parametric colors)
+  &--large {
+    .parametric-knob__wrapper {
+      width: 2.2rem;
+      height: 2.2rem;
+    }
+
+    .parametric-knob__container {
+      width: 2.2rem;
+      height: 2.2rem;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(0,0,0,0.4), transparent 50%),
+        linear-gradient(145deg, #3a3a3a, #2a2a2a 60%, #1a1a1a);
+      box-shadow:
+        inset 0 0.12rem 0.3rem rgba(255,255,255,0.15),
+        inset 0 -0.12rem 0.3rem rgba(0,0,0,0.7),
+        0 0.12rem 0.3rem rgba(0,0,0,0.4);
+      border: .02rem solid rgba(0, 0, 0, 0.2);
+
+      /* Add subtle machined texture with parametric colors */
+      &::after {
+        content: '';
+        position: absolute;
+        inset: .1rem;
+        border-radius: 50%;
+        background:
+          repeating-conic-gradient(
+            from 0deg at 50% 50%,
+            transparent 0deg,
+            rgba(255, 255, 255, 0.02) 1deg,
+            transparent 2deg
+          );
+        pointer-events: none;
+      }
+    }
+
+    .parametric-knob__scale {
+      inset: -.6rem;
+    }
+
+    .parametric-knob__mark {
+      width: .08rem;
+      height: .4rem;
+      transform-origin: 50% 1.6rem;
+      margin-left: -.04rem;
+      margin-top: -1.6rem;
+
+      &--major {
+        width: .12rem;
+        height: .6rem;
+        margin-left: -.06rem;
+      }
+    }
+
+    .parametric-knob__mark-label {
+      top: -.8rem;
+      font-size: .35rem;
+      font-weight: 600;
+    }
+
+    .parametric-knob__indicator {
+      width: .08rem;
+      height: .95rem;
+      margin-left: -.04rem;
+      margin-top: -.95rem;
+      border-radius: .02rem;
+    }
+
+    .parametric-knob__label {
+      font-size: .45rem;
+    }
+  }
+
+  &__scale {
+    position: absolute;
+    inset: -.25rem;
+    pointer-events: none;
+  }
+
+  &__mark {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: .04rem;
+    height: .15rem;
+    background: rgba(255, 255, 255, 0.3);
+    transform-origin: 50% .95rem;
+    margin-left: -.02rem;
+    margin-top: -.95rem;
+
+    &--major {
+      width: .05rem;
+      height: .2rem;
+      background: rgba(255, 255, 255, 0.5);
+      margin-left: -.025rem;
+    }
+  }
+
+  &__mark-label {
+    position: absolute;
+    top: -.4rem;
+    left: 50%;
+    transform: translateX(-50%) rotate(var(--counter-rotate, 0deg));
+    font-size: .22rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  &__indicator {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: .06rem;
+    height: .42rem;
+    background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(180,180,180,0.8));
+    transform-origin: 50% 100%;
+    margin-left: -.03rem;
+    margin-top: -.42rem;
+    border-radius: .03rem;
+    box-shadow: 0 .02rem .06rem rgba(0,0,0,0.6);
+  }
+
+  &__label {
+    font-size: .28rem;
+    color: rgba(255,255,255,0.7);
+    font-weight: 600;
+  }
+}
+
+// Counter-rotation for labels
+.parametric-knob__mark[style*="rotate(-135deg)"] .parametric-knob__mark-label {
+  --counter-rotate: 135deg;
+}
+
+.parametric-knob__mark[style*="rotate(0deg)"] .parametric-knob__mark-label {
+  --counter-rotate: 0deg;
+}
+
+.parametric-knob__mark[style*="rotate(135deg)"] .parametric-knob__mark-label {
+  --counter-rotate: -135deg;
+}
+
+// Special positioning for center label (0)
+.parametric-knob__mark--center .parametric-knob__mark-label {
+  /* small / default knob: keep existing spacing */
+  top: -.35rem;
+}
+
+/* Large variant: increase the gap for the larger knob scale */
+.parametric-knob--large .parametric-knob__mark--center .parametric-knob__mark-label {
+  top: -0.5rem;
+}

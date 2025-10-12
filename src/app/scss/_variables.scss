@@ -1,0 +1,14 @@
+/* overall rack screw size */
+$screw-diameter: 1.35rem;
+/* radius to center of screw */
+$screw-radius: calc($screw-diameter / 2);
+/* how far the cross is inset from edge */
+$cross-inset: 0.34rem;
+/* half-width of each groove in the cross */
+$cross-groove: 0.095rem;
+
+
+  $rail-width: 2.25rem;    /* 0.75in rail face width */
+   $rack-unit: 5.25rem;        /* 1U = 1.75in */
+  $rail-centerline: 1.41rem; /* 0.47in from outside edge */
+  $rack-width: 57rem;         /* Standard 19" rack width */

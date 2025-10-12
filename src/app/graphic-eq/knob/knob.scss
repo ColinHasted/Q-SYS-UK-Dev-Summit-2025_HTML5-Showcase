@@ -1,0 +1,143 @@
+@use 'variables'as *;
+
+
+.knob {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .3rem;
+  margin: .2rem 0;
+
+  &__wrapper {
+    position: relative;
+    width: 2.2rem;
+    height: 2.2rem;
+    cursor: pointer;
+    /* Prevent browser panning/scrolling while dragging knobs (mobile / device emulation) */
+    touch-action: none;
+    -ms-touch-action: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  &__container {
+    position: relative;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background: #a0a0a0;
+    box-shadow:
+      /* Reduced outer shadow for depth */
+      0 .06rem .12rem rgba(0, 0, 0, 0.5),
+      0 .15rem .3rem rgba(0, 0, 0, 0.25),
+      /* Crisp inner highlight */
+      inset 0 .12rem .24rem rgba(255, 255, 255, 0.9),
+      /* Softer inner shadow for edge definition */
+      inset 0 -.08rem .16rem rgba(0, 0, 0, 0.3),
+      /* Defined outer rim */
+      inset 0 0 0 .04rem rgba(0, 0, 0, 0.2);
+    border: .02rem solid rgba(0, 0, 0, 0.1);
+
+    /* Metallic gradient overlay */
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.8) 0%, rgba(232, 232, 232, 0.7) 25%, rgba(200, 200, 200, 0.5) 50%, rgba(160, 160, 160, 0.3) 75%, transparent 100%);
+      pointer-events: none;
+    }
+
+    /* Add machined metal texture */
+    &::after {
+      content: '';
+      position: absolute;
+      inset: .1rem;
+      border-radius: 50%;
+      background:
+        repeating-conic-gradient(from 0deg at 50% 50%,
+          transparent 0deg,
+          rgba(255, 255, 255, 0.05) 1deg,
+          transparent 2deg);
+      pointer-events: none;
+    }
+  }
+
+  &__scale {
+    position: absolute;
+    inset: -.6rem;
+    pointer-events: none;
+  }
+
+  &__mark {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: .08rem;
+    height: .4rem;
+    background: rgba(255, 255, 255, 0.8);
+    transform-origin: 50% 1.6rem;
+    margin-left: -.04rem;
+    margin-top: -1.6rem;
+    opacity: 0.65;
+
+    &--major {
+      width: .12rem;
+      height: .6rem;
+      background: rgba(255, 255, 255, 0.95);
+      margin-left: -.06rem;
+
+    }
+  }
+
+  &__mark-label {
+    position: absolute;
+    top: -.8rem;
+    left: 50%;
+    transform: translateX(-50%) rotate(var(--counter-rotate, 0deg));
+    font-size: .35rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  &__indicator {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: .08rem;
+    height: .95rem;
+    background: linear-gradient(180deg, #2a2a2a, #0a0a0a);
+    transform-origin: 50% 100%;
+    margin-left: -.04rem;
+    margin-top: -.95rem;
+    border-radius: .02rem;
+    box-shadow: 0 .02rem .04rem rgba(0, 0, 0, 0.6);
+    opacity: 0.75;
+  }
+
+  &__label {
+    font-size: .45rem;
+    color: #e6dfd1;
+    font-weight: 600;
+    opacity: 0.7;
+  }
+}
+
+// Counter-rotation for labels
+.knob__mark[style*="rotate(-135deg)"] .knob__mark-label {
+  --counter-rotate: 135deg;
+}
+
+.knob__mark[style*="rotate(0deg)"] .knob__mark-label {
+  --counter-rotate: 0deg;
+}
+
+.knob__mark[style*="rotate(135deg)"] .knob__mark-label {
+  --counter-rotate: -135deg;
+}
+
+.knob__mark--center .knob__mark-label {
+  top: -.50rem;
+}

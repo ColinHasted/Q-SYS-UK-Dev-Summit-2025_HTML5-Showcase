@@ -1,0 +1,137 @@
+<!-- Reusable tick template -->
+<ng-template #ticksTemplate let-alignment="alignment">
+  <div class="eq-section__ticks" [class]="alignment">
+    <div class="eq-section__tick"></div>
+    <div class="eq-section__tick"></div>
+    <div class="eq-section__tick"></div>
+    <div class="eq-section__tick"></div>
+    <div class="eq-section__tick"></div>
+    <div class="eq-section__tick"></div>
+    <div class="eq-section__tick"></div>
+    <div class="eq-section__tick"></div>
+    <div class="eq-section__tick"></div>
+    <div class="eq-section__tick"></div>
+    <div class="eq-section__tick"></div>
+  </div>
+</ng-template>
+
+<div class="graphic-eq graphic-eq--rack-units-2">
+  <!-- Left rack ear -->
+  <div class="graphic-eq__rack-ear graphic-eq__rack-ear--left">
+    <app-rack-screw></app-rack-screw>
+    <div class="graphic-eq__rack-ear__label">GRAPHIC EQ-SYS</div>
+    <app-rack-screw></app-rack-screw>
+  </div>
+
+  <!-- Main chassis -->
+  <div class="graphic-eq__chassis">
+    <!-- Master controls section -->
+    <div class="graphic-eq__master-controls">
+      <!-- Gain knob -->
+      <app-knob
+        [label]="'GAIN'"
+        [minLabel]="'-20'"
+        [centerLabel]="'0'"
+        [maxLabel]="'+20'"
+        [value]="GraphicEqualizer.gain()"
+        [min]="-20"
+        [max]="20"
+        [step]="0.5"
+        [sensitivity]="0.15"
+        (valueChange)="this.GraphicEqualizer.SetGain($event)"
+      ></app-knob>
+
+      <!-- Control buttons -->
+      <div class="graphic-eq__buttons">
+        <button
+          class="control-button control-button--bypass"
+          [class.control-button--active]="GraphicEqualizer.bypass()"
+          (click)="toggleBypass()"
+        >
+          <div class="control-button__led"></div>
+          <span class="control-button__label">BYPASS</span>
+        </button>
+
+        <button
+          class="control-button control-button--invert"
+          [class.control-button--active]="GraphicEqualizer.invert()"
+          (click)="toggleInvert()"
+        >
+          <div class="control-button__led"></div>
+          <span class="control-button__label">INVERT</span>
+        </button>
+
+        <button
+          class="control-button control-button--mute"
+          [class.control-button--active]="GraphicEqualizer.mute()"
+          (click)="toggleMute()"
+        >
+          <div class="control-button__led"></div>
+          <span class="control-button__label">MUTE</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- EQ section -->
+    <div class="graphic-eq__eq-section">
+      <!-- dB Scale Legend -->
+      <div class="db-legend db-legend--left">
+        <div class="db-legend__mark">+20</div>
+        <div class="db-legend__mark">0dB</div>
+        <div class="db-legend__mark">-20</div>
+      </div>
+
+      <!-- Frequency bands -->
+      <div class="eq-section__bands">
+        @for (band of GraphicEqualizer.Bands; track band) {
+        <ng-container
+          *ngTemplateOutlet="
+            ticksTemplate;
+            context: { alignment: band.Frequency === 20 ? 'align-right' : '' }
+          "
+        ></ng-container>
+        <div class="eq-section__band">
+          <div class="eq-slider">
+            <div class="eq-slider__container">
+              <div class="eq-slider__track">
+                <input
+                  type="range"
+                  class="eq-slider__input"
+                  [value]="band.Gain()"
+                  min="-20"
+                  max="20"
+                  (input)="onSliderChange($index, $event)"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="eq-section__frequency">{{ band.Title }}</div>
+        </div>
+        }
+        <ng-container
+          *ngTemplateOutlet="
+            ticksTemplate;
+            context: { alignment: 'align-left' }
+          "
+        ></ng-container>
+      </div>
+
+      <!-- Right dB Scale Legend -->
+      <div class="db-legend db-legend--right">
+        <div class="db-legend__mark">+20</div>
+        <div class="db-legend__mark">0dB</div>
+        <div class="db-legend__mark">-20</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right rack ear -->
+  <div class="graphic-eq__rack-ear graphic-eq__rack-ear--right">
+    <img
+      class="graphic-eq__rack-ear__logo"
+      src="/assets/images/logo/q-sys-emblem-white.svg"
+    />
+    <app-rack-screw></app-rack-screw>
+    <app-rack-screw></app-rack-screw>
+  </div>
+</div>

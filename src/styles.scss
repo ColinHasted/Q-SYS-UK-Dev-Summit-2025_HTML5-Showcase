@@ -1,0 +1,52 @@
+@font-face {
+  font-family: 'LCDDotTR';
+  src:  url('/assets/fonts/lcddot_tr.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'SinkinSans';
+  src: url('/assets/fonts/Sinkin/SinkinSans-400Regular-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'SinkinSans';
+  src: url('/assets/fonts/Sinkin/SinkinSans-500Medium-webfont.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  user-select: none;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  background-color: #2b4162;
+  //  background-image: linear-gradient(315deg, #2b4162 0%, #4d4b56 74%);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%), radial-gradient(at top center, rgba(255, 255, 255, 0.40) 0%, rgba(0, 0, 0, 0.40) 120%) #989898;
+  background-blend-mode: multiply;
+
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+  overflow-x: hidden;
+  font-size: max(0.375rem, 1.25vw);
+}
+
+@for $i from 1 through 8 {
+  .equipment-rack__bay--equipment > *[data-rack-units="#{$i}"] {
+    grid-row: auto / span #{$i};
+  }
+}
+

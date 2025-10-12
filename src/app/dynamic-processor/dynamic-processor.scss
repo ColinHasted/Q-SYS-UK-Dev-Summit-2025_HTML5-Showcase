@@ -1,0 +1,468 @@
+@use 'variables' as *;
+
+$green: #228B22;
+$green-dark: #1F7A1F;
+$green-darker: #1C6B1C;
+$text: #ffffff;
+$border: #1F7A1F;
+
+.dynamic-processor {
+  background:
+    radial-gradient(120% 150% at 20% 20%, rgba(255, 255, 255, 0.15), transparent 50%),
+    radial-gradient(100% 120% at 80% 30%, $green-dark, transparent 50%),
+    radial-gradient(130% 140% at 30% 70%, $green-darker, transparent 60%),
+    linear-gradient(145deg,
+      $green 0%,
+      $green-dark 25%,
+      $green-darker 50%,
+      #195919 70%,
+      #164716 100%);
+
+  border: 0.0625rem solid $border;
+  border-radius: .5rem;
+  box-shadow:
+    inset 0 0.125rem 0 rgba(255, 255, 255, .4),
+    inset 0 -0.125rem 0 rgba(0, 0, 0, .3),
+    inset 0.125rem 0 0.1875rem rgba(255, 255, 255, .2),
+    inset -0.125rem 0 0.1875rem rgba(0, 0, 0, .2),
+    0 1.125rem 2.5rem rgba(0, 0, 0, .5),
+    0 0 0.9375rem rgba(34, 139, 34, .2);
+  display: flex;
+  flex-direction: row;
+  height: $rack-unit;
+  position: relative;
+  width: $rack-width;
+
+  &::before {
+    content: '';
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1), transparent 40%),
+      radial-gradient(circle at 70% 80%, rgba(0, 0, 0, 0.05), transparent 30%);
+    border-radius: .5rem;
+    opacity: 0.8;
+    position: absolute;
+  }
+
+  &__chassis {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    height: 100%;
+    justify-content: space-evenly;
+    padding: 0.4rem;
+    width: 100%;
+
+    &__badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 3rem;
+      flex: 0 0 auto;
+
+      .qsys-logo {
+        width: 4rem;
+        opacity: 0.9;
+        text-shadow: 0 0.0625rem 0 rgba(255, 255, 255, 0.2);
+        filter: drop-shadow(0 0.0625rem 0.0625rem rgba(255, 255, 255, 0.2));
+      }
+
+      .description {
+        font-family: 'Arial', sans-serif;
+        font-size: 0.4rem;
+        font-weight: normal;
+        color: #000000;
+        opacity: 0.8;
+        margin-top: 0.1rem;
+        letter-spacing: 0.08em;
+        text-align: center;
+  text-shadow: 0 0.0625rem 0 rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+
+  &__rack-ear {
+    height: $rack-unit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: calc(0.25rem - $screw-radius);
+    position: relative;
+
+    &--left {
+      align-items: flex-start;
+      padding-left: calc($rail-centerline - $screw-radius);
+    }
+
+    &--right {
+      align-items: flex-end;
+      padding-right: calc($rail-centerline - $screw-radius);
+    }
+  }
+}
+
+.controls {
+  display: flex;
+  flex: 1 1 auto;
+  height: 100%;
+  gap: 0rem;
+
+  &__io {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    min-width: 3rem;
+    padding-top: 0.9rem;
+  }
+
+  &__processing {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-evenly;
+    height: 100%;
+
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.2rem 0;
+      margin-bottom: 0.3rem;
+      width: 90%;
+      position: relative;
+    }
+
+    &__title {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.5rem; // Slightly smaller
+      font-weight: bold;
+      color: #000000;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-shadow: 0 0.03125rem 0 rgba(255, 255, 255, 0.3);
+    }
+
+    &__meter {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+      flex: 1;
+      justify-content: flex-end;
+      margin-right: 0.4rem;
+    }
+
+    &__controls {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem; // Consistent spacing
+      flex-wrap: wrap;
+      padding: 0 0.5rem;
+    }
+  }
+
+
+
+
+  // Physical section dividers
+  .section-divider {
+    width: 0.0625rem;
+    height: calc(100% - 1rem); // Leave some margin top/bottom
+    margin: 0.5rem 0;
+    background: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, 0.3) 10%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0.3) 90%,
+        transparent 100%);
+    box-shadow: 0.0625rem 0 0 rgba(255, 255, 255, 0.1);
+    flex: 0 0 auto;
+  }
+
+  // Main processor sections layout - Compact with equal flex
+
+
+  // Combined title and meter row for space efficiency
+
+
+
+  .meter-inline {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex: 1;
+    justify-content: flex-end;
+    // Align with the right edge of the rightmost knob in control-grid
+    margin-right: 0.4rem;
+
+    .status-led {
+      width: 0.5rem;
+      height: 0.5rem;
+      flex-shrink: 0;
+    }
+  }
+
+  .vu-meter-compact {
+    display: flex;
+    align-items: center;
+
+    .vu-meter {
+      width: 4rem;
+      height: 0.5rem;
+    }
+  }
+
+  // Legacy styles - can be removed later
+  .led-container {
+    flex-direction: row;
+    gap: 0.2rem;
+    margin-right: 0.3rem;
+
+    .led-label {
+      font-size: 0.4rem;
+    }
+
+    .status-led {
+      width: 0.5rem;
+      height: 0.5rem;
+    }
+  }
+
+  // Compact threshold indicators
+  .threshold-indicators {
+    flex-direction: row;
+    gap: 0.2rem;
+    margin-right: 0.3rem;
+
+    .threshold-led {
+      width: 0.4rem;
+      height: 0.4rem;
+    }
+  }
+}
+
+
+
+.meter-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 0.3rem;
+  width: 100%;
+}
+
+// VU Meter styling
+.vu-meter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.vu-label {
+  font-family: 'Arial', sans-serif;
+  font-size: 0.35rem;
+  font-weight: bold;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0.0625rem 0 rgba(255, 255, 255, 0.3);
+}
+
+.vu-meter {
+  display: flex;
+  flex-direction: row;
+  gap: 0.0625rem;
+  height: 0.6rem;
+  width: 6rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0.125rem;
+  padding: 0.125rem;
+  box-shadow:
+    inset 0 0.125rem 0.25rem rgba(0, 0, 0, 0.6),
+    inset 0 -0.0625rem 0.125rem rgba(255, 255, 255, 0.1);
+}
+
+.vu-segment {
+  height: 100%;
+  width: 0.375rem;
+  border-radius: 0.0625rem;
+  background: rgba(100, 100, 100, 0.3);
+  transition: all 0.1s ease;
+
+  &.active {
+    &.green {
+      background: linear-gradient(90deg, #00ff00, #00cc00);
+      box-shadow: 0 0 0.1875rem rgba(0, 255, 0, 0.6);
+    }
+
+    &.yellow {
+      background: linear-gradient(90deg, #ffff00, #cccc00);
+      box-shadow: 0 0 0.1875rem rgba(255, 255, 0, 0.6);
+    }
+
+    &.red {
+      background: linear-gradient(90deg, #ff0000, #cc0000);
+      box-shadow: 0 0 0.1875rem rgba(255, 0, 0, 0.6);
+    }
+  }
+}
+
+.vu-scale {
+  display: flex;
+  justify-content: space-between;
+  width: 6rem;
+  margin-top: 0.1rem;
+
+  .scale-mark {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.3rem;
+    font-weight: bold;
+    color: #000000;
+    opacity: 0.7;
+    text-shadow: 0 0.0625rem 0 rgba(255, 255, 255, 0.2);
+  }
+}
+
+// Threshold indicators for compressor
+.threshold-indicators {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.threshold-led {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(100, 100, 100, 0.3), rgba(50, 50, 50, 0.8));
+  box-shadow:
+    inset 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.8),
+    inset 0 -0.0625rem 0.0625rem rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+
+  &.active {
+    &.above {
+      background: radial-gradient(circle at 30% 30%, #ff0000, #cc0000);
+      box-shadow: 0 0 0.375rem rgba(255, 0, 0, 0.8);
+    }
+
+    &.at {
+      background: radial-gradient(circle at 30% 30%, #ffff00, #cccc00);
+      box-shadow: 0 0 0.375rem rgba(255, 255, 0, 0.8);
+    }
+
+    &.below {
+      background: radial-gradient(circle at 30% 30%, #00ff00, #00cc00);
+      box-shadow: 0 0 0.375rem rgba(0, 255, 0, 0.8);
+    }
+  }
+}
+
+// Removed old knob styles - now using DbxKnobComponent
+
+// Status LEDs
+.led-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.status-led {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  position: relative;
+
+  // Default off state - dark with subtle ring
+  background:
+    radial-gradient(circle at 30% 30%, rgba(100, 100, 100, 0.3), rgba(50, 50, 50, 0.8)),
+    linear-gradient(145deg, #333333, #1a1a1a);
+
+  box-shadow:
+    inset 0 0.125rem 0.25rem rgba(0, 0, 0, 0.8),
+    inset 0 -0.0625rem 0.125rem rgba(255, 255, 255, 0.1),
+    0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.4);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0.0625rem;
+    border-radius: 50%;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), transparent 50%);
+    pointer-events: none;
+  }
+
+  // Active states
+  &.active {
+    &.gate-led {
+      background:
+        radial-gradient(circle at 30% 30%, #00ff00, #00cc00 60%, #009900),
+        linear-gradient(145deg, #00ff00, #00aa00);
+      box-shadow:
+        0 0 0.5rem rgba(0, 255, 0, 0.8),
+        0 0 1rem rgba(0, 255, 0, 0.4),
+        inset 0 0.0625rem 0.125rem rgba(255, 255, 255, 0.3),
+        inset 0 -0.0625rem 0.125rem rgba(0, 0, 0, 0.2);
+    }
+
+    &.compressor-led {
+      background:
+        radial-gradient(circle at 30% 30%, #ffff00, #cccc00 60%, #999900),
+        linear-gradient(145deg, #ffff00, #aaaa00);
+      box-shadow:
+        0 0 0.5rem rgba(255, 255, 0, 0.8),
+        0 0 1rem rgba(255, 255, 0, 0.4),
+        inset 0 0.0625rem 0.125rem rgba(255, 255, 255, 0.3),
+        inset 0 -0.0625rem 0.125rem rgba(0, 0, 0, 0.2);
+    }
+
+    &.limiter-led {
+      background:
+        radial-gradient(circle at 30% 30%, #ff0000, #cc0000 60%, #990000),
+        linear-gradient(145deg, #ff0000, #aa0000);
+      box-shadow:
+        0 0 0.5rem rgba(255, 0, 0, 0.8),
+        0 0 1rem rgba(255, 0, 0, 0.4),
+        inset 0 0.0625rem 0.125rem rgba(255, 255, 255, 0.3),
+        inset 0 -0.0625rem 0.125rem rgba(0, 0, 0, 0.2);
+    }
+
+    &.threshold-led {
+      background:
+        radial-gradient(circle at 30% 30%, #ffff00, #cccc00 60%, #999900),
+        linear-gradient(145deg, #ffff00, #aaaa00);
+      box-shadow:
+        0 0 0.5rem rgba(255, 255, 0, 0.8),
+        0 0 1rem rgba(255, 255, 0, 0.4),
+        inset 0 0.0625rem 0.125rem rgba(255, 255, 255, 0.3),
+        inset 0 -0.0625rem 0.125rem rgba(0, 0, 0, 0.2);
+    }
+
+    &.limit-led {
+      background:
+        radial-gradient(circle at 30% 30%, #ff0000, #cc0000 60%, #990000),
+        linear-gradient(145deg, #ff0000, #aa0000);
+      box-shadow:
+        0 0 0.5rem rgba(255, 0, 0, 0.8),
+        0 0 1rem rgba(255, 0, 0, 0.4),
+        inset 0 0.0625rem 0.125rem rgba(255, 255, 255, 0.3),
+        inset 0 -0.0625rem 0.125rem rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.led-label {
+  font-family: 'Arial', sans-serif;
+  font-size: 0.5rem;
+  font-weight: bold;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0.0625rem 0 rgba(255, 255, 255, 0.3);
+}

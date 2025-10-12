@@ -1,0 +1,57 @@
+<!--ARSE – Acoustic Response & System Evaluator-->
+<!-- WANK – Waveform Analysis & Noise Kit-->
+<!--SLAG – Sound Level Analysis Grapher-->
+<!-- BUGGER – Bandwidth & Utility Grapher for Gain, EQ & Response-->
+
+<div class="audio-analyser" [attr.data-rack-units]="2">
+    <div class="audio-analyser__rack-ear audio-analyser__rack-ear--left">
+    <app-rack-screw></app-rack-screw>
+    <app-rack-screw></app-rack-screw>
+  </div>
+
+  <div class="audio-analyser__chassis">
+    <div class="chrome-handle chrome-handle--left"></div>
+    <!-- LCD Window -->
+    <div class="lcd-window">
+      <div class="lcd-label">PHASE</div>
+      <div class="lcd-frame">
+
+        <div class="lcd-screen">
+    <app-phase [frequencies]="responsalyzerComponent.frequencies()" [phase]="responsalyzerComponent.phase()"></app-phase>
+        </div>
+      </div>
+    </div>
+    <div class="rack-fixings">
+      <app-torx-screw></app-torx-screw>
+      <app-torx-screw></app-torx-screw>
+    </div>
+    <!-- LCD Window -->
+    <div class="lcd-window">
+      <div class="lcd-label">MAGNITUDE</div>
+      <div class="lcd-frame">
+        <div class="lcd-screen">
+    <app-magnitude [frequencies]="responsalyzerComponent.frequencies()" [magnitude]="responsalyzerComponent.magnitude()" [coherence]="responsalyzerComponent.coherence()"></app-magnitude>
+
+        </div>
+      </div>
+    </div>
+    <div class="rack-fixings">
+      <app-torx-screw></app-torx-screw>
+      <app-torx-screw></app-torx-screw>
+    </div>
+    <!-- LCD Window -->
+    <div class="lcd-window">
+      <div class="lcd-label">REAL-TIME ANALYSER</div>
+      <div class="lcd-frame">
+        <div class="lcd-screen">
+          <app-rta [frequencies]="responsalyzerComponent.frequencies()" [response]="responsalyzerComponent.response()"></app-rta>
+        </div>
+      </div>
+    </div>
+    <div class="chrome-handle chrome-handle--right"></div>
+  </div>
+      <div class="audio-analyser__rack-ear audio-analyser__rack-ear--right">
+    <app-rack-screw></app-rack-screw>
+    <app-rack-screw></app-rack-screw>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="led-meter" [style.width]="width()" [style.height]="height()">
+  <!-- Optional label -->
+   @if(label())
+   {
+  <div class="led-label">{{ label() }}</div>
+   }
+  <!-- LED segments container -->
+  <div class="led-segments">
+    @for (segment of ledSegments(); track $index) {
+    <div
+      class="led-segment"
+      [class.active]="isLedActive($index)"
+      [class]="getLedColorClass($index)"
+  [style.width]="'calc(100% / ' + ledCount() + ' - 0.0625rem)'"
+    ></div>
+    }
+  </div>
+
+  @if(showScale())
+{
+  <!-- Optional scale markers -->
+  <div class="led-scale">
+    @for (mark of scaleMarks(); track mark.value) {
+    <span
+      class="scale-mark"
+      [style.left]="mark.position"
+    >
+      {{ mark.value }}
+    </span>
+    }
+  </div>
+}
+</div>

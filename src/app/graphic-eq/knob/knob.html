@@ -1,0 +1,59 @@
+<div class="knob">
+  <div
+    class="knob__wrapper"
+    tabindex="0"
+    [attr.aria-label]="label()"
+    (pointerdown)="onPointerDown($event)"
+    (keydown)="onKeydown($event)"
+  >
+    <div class="knob__scale">
+      <div
+        class="knob__mark knob__mark--major"
+        style="transform: rotate(-135deg)"
+      >
+        <span class="knob__mark-label">{{ minLabel() }}</span>
+      </div>
+      <div
+        class="knob__mark"
+        style="transform: rotate(-108deg)"
+      ></div>
+      <div
+        class="knob__mark"
+        style="transform: rotate(-81deg)"
+      ></div>
+      <div
+        class="knob__mark"
+        style="transform: rotate(-54deg)"
+      ></div>
+      <div
+        class="knob__mark"
+        style="transform: rotate(-27deg)"
+      ></div>
+      <div
+        class="knob__mark knob__mark--major knob__mark--center"
+      >
+        <span class="knob__mark-label">{{ centerLabel() }}</span>
+      </div>
+      <div class="knob__mark" style="transform: rotate(27deg)"></div>
+      <div class="knob__mark" style="transform: rotate(54deg)"></div>
+      <div class="knob__mark" style="transform: rotate(81deg)"></div>
+      <div
+        class="knob__mark"
+        style="transform: rotate(108deg)"
+      ></div>
+      <div
+        class="knob__mark knob__mark--major"
+        style="transform: rotate(135deg)"
+      >
+        <span class="knob__mark-label">{{ maxLabel() }}</span>
+      </div>
+    </div>
+    <div class="knob__container">
+      <div
+        class="knob__indicator"
+        [style.transform]="indicatorRotation()"
+      ></div>
+    </div>
+  </div>
+  <div class="knob__label">{{ label() }}</div>
+</div>

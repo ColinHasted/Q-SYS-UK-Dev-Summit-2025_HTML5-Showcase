@@ -1,0 +1,82 @@
+<div class="audio-player" [attr.data-rack-units]="1">
+  <div class="audio-player__rack-ear audio-player__rack-ear--left">
+    <app-rack-screw></app-rack-screw>
+    <app-rack-screw></app-rack-screw>
+  </div>
+
+  <div class="audio-player__chassis">
+    <div class="dark-handle dark-handle--left"></div>
+
+    <!-- Main Display Window with glass effect -->
+    <div class="display-window">
+      <div class="display-frame">
+        <div class="display-glass">
+          <div class="counter-display">
+            <div class="counter-main">{{progress()}}</div>
+            <div class="file-info">{{audioPlayer.filenameUi()}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transport Controls with Icons and LEDs -->
+    <div class="transport-section">
+      <button class="transport-btn" (pointerdown)="audioPlayer.Rewind(true)" (pointerup)="audioPlayer.Rewind(false)" (pointercancel)="audioPlayer.Rewind(false)">
+        <div class="btn-led" [class.active]="audioPlayer.rewind()"></div>
+        <img src="/assets/icons/transport/rewind.svg" alt="Rewind" class="transport-icon">
+      </button>
+      <button class="transport-btn" (click)="audioPlayer.Play()">
+        <div class="btn-led" [class.active]="audioPlayer.playing()"></div>
+        <img src="/assets/icons/transport/play.svg" alt="Play" class="transport-icon">
+      </button>
+      <button class="transport-btn" (pointerdown)="audioPlayer.FastForward(true)" (pointerup)="audioPlayer.FastForward(false)" (pointercancel)="audioPlayer.FastForward(false)">
+        <div class="btn-led" [class.active]="audioPlayer.fastForward()"></div>
+        <img src="/assets/icons/transport/fast-forward.svg" alt="Fast Forward" class="transport-icon">
+      </button>
+      <button class="transport-btn" (click)="audioPlayer.Stop()">
+        <div class="btn-led" [class.active]="audioPlayer.stopped()"></div>
+        <img src="/assets/icons/transport/stop.svg" alt="Stop" class="transport-icon">
+      </button>
+      <button class="transport-btn" (click)="audioPlayer.Pause()">
+        <div class="btn-led" [class.active]="audioPlayer.paused()"></div>
+        <img src="/assets/icons/transport/pause.svg" alt="Pause" class="transport-icon">
+      </button>
+      <button class="transport-btn" (click)="audioPlayer.LoopToggle()">
+        <div class="btn-led" [class.active]="audioPlayer.loop()"></div>
+        <img src="/assets/icons/transport/loop.svg" alt="Loop" class="transport-icon">
+      </button>
+      <button class="transport-btn transport-btn--auto" (click)="audioPlayer.AutoPlayOnStartupToggle()">
+        <div class="btn-led" [class.active]="audioPlayer.playOnStartup()"></div>
+        <span class="auto-text">AUTO<br>PLAY</span>
+      </button>
+    </div>
+
+    <!-- Level Controls with Dynamic Knob -->
+    <div class="level-section">
+      <div class="level-knob-wrapper">
+        <app-audio-player-volume-knob
+          [value]="audioPlayer.gain()"
+          [min]="-100"
+          [max]="20"
+          [step]="1"
+          [label]="'Level'"
+          [minLabel]="'-100'"
+
+          [maxLabel]="'+20'"
+          (valueChange)="onLevelChange($event)">
+        </app-audio-player-volume-knob>
+      </div>
+      <button class="mute-button" (click)="toggleMute()">
+        <div class="mute-led" [class.on]="audioPlayer.mute()"></div>
+        <span class="mute-text">MUTE</span>
+      </button>
+    </div>
+
+    <div class="dark-handle dark-handle--right"></div>
+  </div>
+
+  <div class="audio-player__rack-ear audio-player__rack-ear--right">
+    <app-rack-screw></app-rack-screw>
+    <app-rack-screw></app-rack-screw>
+  </div>
+</div>

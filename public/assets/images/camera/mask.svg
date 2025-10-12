@@ -1,0 +1,16 @@
+<svg width="160" height="90" viewBox="0 0 160 90" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <mask id="edge-cutouts">
+      <!-- Make the whole area opaque (black) initially -->
+      <rect width="160" height="90" fill="white" />
+      <!-- Cut out semi-circles on each side -->
+      <circle cx="80" cy="0" r="10" fill="black" />   <!-- Top edge -->
+      <circle cx="80" cy="90" r="10" fill="black" /> <!-- Bottom edge -->
+      <circle cx="0" cy="45" r="10" fill="black" />   <!-- Left edge -->
+      <circle cx="160" cy="45" r="10" fill="black" /> <!-- Right edge -->
+      <circle cx="150" cy="80" r="7.5" fill="black" /> <!-- Right edge -->
+      <circle cx="150" cy="10" r="7.5" fill="black" />    <!-- Top left -->
+    </mask>
+  </defs>
+  <rect width="160" height="90" fill="white" mask="url(#edge-cutouts)" />
+</svg>

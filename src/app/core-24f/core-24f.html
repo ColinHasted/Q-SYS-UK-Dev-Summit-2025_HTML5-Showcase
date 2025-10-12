@@ -1,0 +1,58 @@
+<div class="q-sys-core-24f">
+  <div class="q-sys-core-24f__rack-ear q-sys-core-24f__rack-ear--left">
+    <app-rack-screw></app-rack-screw>
+    <app-rack-screw></app-rack-screw>
+  </div>
+  <div class="q-sys-core-24f__chassis">
+    <div class="q-sys-core-24f__chassis__branding">
+      <img
+        class="q-sys-core-24f__chassis__branding--logo"
+        src="/assets/images/logo/q-sys-logo-text.svg"
+      />
+      <span class="q-sys-core-24f__chassis__branding--model">CORE 24f</span>
+      <span class="q-sys-core-24f__chassis__branding--type">PROCESSOR</span>
+    </div>
+    <div class="q-sys-core-24f__chassis__vent">
+      <div class="q-sys-core-24f__chassis__vent__holes"></div>
+    </div>
+    <div class="q-sys-core-24f__chassis__lcd-screen">
+      <div class="q-sys-core-24f__chassis__lcd-screen__text">
+        Q-SYS<br />
+        Dev Summit 2025
+      </div>
+      <div class="q-sys-core-24f__chassis__lcd-screen__controls">
+        <div class="q-sys-core-24f__chassis__lcd-screen__controls__power">
+          <div class="led led--power" [class.active]="Core.statusLed()"></div>
+          <span
+            class="q-sys-core-24f__chassis__lcd-screen__controls__power--text"
+            >POWER</span
+          >
+        </div>
+        <div class="q-sys-core-24f__chassis__lcd-screen__controls__menu">
+          <div class="soft-button">
+            <div class="soft-button__header">
+              <span class="soft-button__header--label">PAGE</span>
+              <div class="soft-button__header--connector"></div>
+            </div>
+            <button class="soft-button__button"></button>
+          </div>
+
+
+
+          <div class="soft-button">
+            <div class="soft-button__header">
+            <div class="led led--id" [class.active]="Core.identifyLed()"></div>
+              <span class="soft-button__header--label">ID</span>
+              <div class="soft-button__header--connector"></div>
+            </div>
+            <button class="soft-button__button" (click)="Core.Identify()"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="q-sys-core-24f__rack-ear q-sys-core-24f__rack-ear--right">
+    <app-rack-screw></app-rack-screw>
+    <app-rack-screw></app-rack-screw>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="dynamic-knob">
+  <div
+    class="dynamic-knob__wrapper"
+    tabindex="0"
+    [attr.aria-label]="label()"
+    (pointerdown)="onPointerDown($event)"
+    (keydown)="onKeydown($event)"
+  >
+    <div class="dynamic-knob__scale">
+      <div
+        class="dynamic-knob__mark dynamic-knob__mark--major"
+        style="transform: rotate(-135deg)"
+      >
+        <span class="dynamic-knob__mark-label">{{ minLabel() }}</span>
+      </div>
+      <div
+        class="dynamic-knob__mark"
+        style="transform: rotate(-108deg)"
+      ></div>
+      <div
+        class="dynamic-knob__mark"
+        style="transform: rotate(-81deg)"
+      ></div>
+      <div
+        class="dynamic-knob__mark"
+        style="transform: rotate(-54deg)"
+      ></div>
+      <div
+        class="dynamic-knob__mark"
+        style="transform: rotate(-27deg)"
+      ></div>
+      <div
+        class="dynamic-knob__mark dynamic-knob__mark--major dynamic-knob__mark--center"
+        style="transform: rotate(0deg)"
+      >
+        @if(centerLabel()) {
+          <span class="dynamic-knob__mark-label">{{ centerLabel() }}</span>
+        }
+      </div>
+      <div class="dynamic-knob__mark" style="transform: rotate(27deg)"></div>
+      <div class="dynamic-knob__mark" style="transform: rotate(54deg)"></div>
+      <div class="dynamic-knob__mark" style="transform: rotate(81deg)"></div>
+      <div
+        class="dynamic-knob__mark"
+        style="transform: rotate(108deg)"
+      ></div>
+      <div
+        class="dynamic-knob__mark dynamic-knob__mark--major"
+        style="transform: rotate(135deg)"
+      >
+        <span class="dynamic-knob__mark-label">{{ maxLabel() }}</span>
+      </div>
+    </div>
+    <div class="dynamic-knob__container">
+      <div
+        class="dynamic-knob__indicator"
+        [style.transform]="indicatorRotation()"
+      ></div>
+    </div>
+  </div>
+
+  <div class="dynamic-knob__label">{{ label() }}</div>
+</div>

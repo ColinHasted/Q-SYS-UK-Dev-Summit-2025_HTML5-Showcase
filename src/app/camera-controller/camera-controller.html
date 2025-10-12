@@ -1,0 +1,177 @@
+<div class="camera-controller" [attr.data-rack-units]="2">
+  <div class="camera-controller__rack-ear camera-controller__rack-ear--left">
+    <app-rack-screw></app-rack-screw>
+    <app-rack-screw></app-rack-screw>
+  </div>
+
+  <div class="camera-controller__chassis">
+    <div class="rack-fixings">
+      <app-torx-screw></app-torx-screw>
+      <app-torx-screw></app-torx-screw>
+    </div>
+
+    <div class="camera-controller__lcd-window">
+      <div class="camera-controller__lcd-window--lcd-frame">
+        <div class="camera-controller__lcd-window__screen">
+          <img
+            class="camera-controller__lcd-window__screen--img"
+            [src]="previewImage()"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="rack-fixings">
+      <app-torx-screw></app-torx-screw>
+      <app-torx-screw></app-torx-screw>
+    </div>
+
+    <div class="camera-controller__controls">
+      <div class="camera-controller__controls__group">
+        <div class="camera-controller__controls__group--label">PAN / TILT</div>
+        <div class="camera-controller__ptz-grid">
+          <button class="camera-btn">
+            <img
+              style="transform: rotate(-45deg)"
+              src="assets/icons/navigation/up.svg"
+            />
+          </button>
+          <button class="camera-btn">
+            <img src="assets/icons/navigation/up.svg" />
+          </button>
+          <button class="camera-btn">
+            <img
+              style="transform: rotate(45deg)"
+              src="assets/icons/navigation/up.svg"
+            />
+          </button>
+          <button class="camera-btn">
+            <img src="assets/icons/navigation/left.svg" />
+          </button>
+          <button
+            class="camera-btn camera-btn--centre"
+            aria-label="Home Position"
+          >
+            <img src="assets/icons/navigation/home.svg" />
+          </button>
+          <button class="camera-btn">
+            <img src="assets/icons/navigation/right.svg" />
+          </button>
+
+          <button class="camera-btn">
+            <img
+              style="transform: rotate(45deg)"
+              src="assets/icons/navigation/down.svg"
+            />
+          </button>
+          <button class="camera-btn" aria-label="Tilt Down">
+            <img src="assets/icons/navigation/down.svg" />
+          </button>
+          <button class="camera-btn">
+            <img
+              style="transform: rotate(-45deg)"
+              src="assets/icons/navigation/down.svg"
+            />
+          </button>
+        </div>
+      </div>
+
+      <div class="camera-controller__controls__group">
+        <div class="camera-controller__controls__group--label">
+          ZOOM / FOCUS
+        </div>
+        <div class="zoom-focus-controls">
+          <div class="zoom-section">
+            <div class="section-label">Zoom</div>
+            <button
+              class="camera-btn camera-btn--function"
+              aria-label="Zoom In"
+            >
+              <img src="assets/icons/camera/zoom-in.svg" />
+            </button>
+            <button
+              class="camera-btn camera-btn--function"
+              aria-label="Zoom Out"
+            >
+              <img src="assets/icons/camera/zoom-out.svg" />
+            </button>
+          </div>
+          <div class="focus-section">
+            <div class="section-label">Focus</div>
+            <button
+              class="camera-btn camera-btn--function"
+              aria-label="Focus Near"
+            >
+              <img style="width: 35%" src="assets/icons/camera/plus.svg" />
+            </button>
+            <button
+              class="camera-btn camera-btn--function"
+              aria-label="Focus Far"
+            >
+              <img style="width: 35%"  src="assets/icons/camera/minus.svg" />
+            </button>
+            <button
+              class="camera-btn camera-btn--function"
+
+            >
+              <img style="width: 50%" src="assets/icons/camera/auto-focus.svg" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Group 3: Camera Presets -->
+      <div class="camera-controller__controls__group">
+        <div class="camera-controller__controls__group--label">PRESETS</div>
+        <div class="camera-controller__ptz-grid">
+          @for (n of [1,2,3,4,5,6,7,8,9]; track $index) {
+            <button
+              class="camera-btn camera-btn--preset"
+              aria-label="Preset {{n}}"
+              (pointerdown)="onPresetPress(n)"
+              (pointerup)="onPresetRelease(n)"
+              (pointercancel)="onPresetRelease(n)"
+            >
+              {{n}}
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="camera-controller__controls__group">
+        <div class="modifier-controls">
+          <div class="modifier-item">
+            <div class="section-label">Auto<br />Framing</div>
+            <button
+              class="camera-btn camera-btn--modifier"
+              aria-label="Toggle Auto Framing"
+            >
+              <img src="assets/icons/camera/auto-framing.svg" />
+            </button>
+          </div>
+          <div class="modifier-item">
+            <div class="section-label">Privacy</div>
+            <button
+              class="camera-btn camera-btn--modifier"
+              aria-label="Toggle Privacy Mode"
+            >
+              <img src="assets/icons/camera/privacy.svg" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="rack-fixings">
+      <app-torx-screw></app-torx-screw>
+      <app-torx-screw></app-torx-screw>
+    </div>
+  </div>
+  <div class="camera-controller__rack-ear camera-controller__rack-ear--right">
+    <app-rack-screw></app-rack-screw>
+        <img
+      class="camera-controller__rack-ear__logo"
+      src="/assets/images/logo/q-sys-emblem-white.svg"
+    />
+    <app-rack-screw></app-rack-screw>
+  </div>
+</div>

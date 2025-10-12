@@ -1,0 +1,110 @@
+@use 'variables'as *;
+/* Accurate EIA-310 spacing with 3/8" square holes @ scale 1in = 3rem */
+
+/* Host is just a container; sizing happens on .rack-rail */
+
+$hole: 1.125rem;
+/* 3/8" square hole */
+$h1: 0.75rem;
+/* top hole centre offset within 1U (0.25") */
+$h2: 2.625rem;
+/* middle hole centre offset (0.875") */
+$h3: 4.5rem;
+/* bottom hole centre offset (1.5") */
+$rail-bg-1: #24282d;
+$rail-bg-2: #181b1f;
+$rail-bg-3: #121519;
+$rail-edge: #0e0f11;
+$edge: 0.142rem;
+/* visual edge/border thickness */
+$rail-sheen: rgba(255, 255, 255, .04);
+$hole-colour: #0a0b0c;
+$steel-edge-hi: rgba(255, 255, 255, .14);
+$steel-edge-lo: rgba(0, 0, 0, .35);
+
+.rack-rail {
+  //display: inline-block;
+  position: relative;
+  width: $rail-width;
+  height: calc(var(--units) * $rack-unit);
+  box-sizing: border-box;
+  /* keep total width = rail face */
+
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .08), transparent 35%, transparent 65%, rgba(0, 0, 0, .35)),
+    linear-gradient(90deg, $rail-bg-1, $rail-bg-2 55%, $rail-bg-3);
+  border-left: $edge solid $rail-edge;
+  border-right: $edge solid $rail-edge;
+  border-radius: $edge;
+  box-shadow:
+    inset 0 0 0.095rem rgba(255, 255, 255, .05),
+    /* ≈0.8mm */
+    inset 0 0 0.709rem rgba(0, 0, 0, .45);
+  /* ≈6mm */
+  display: grid;
+  grid-template-rows: repeat(var(--units  ), var(--ru));
+  overflow: hidden;
+}
+
+/* subtle metal sheen */
+.rack-rail::before,
+.rack-rail::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.rack-rail::before {
+  background: linear-gradient(90deg, transparent, $rail-sheen 40%, transparent 70%);
+  mix-blend-mode: screen;
+  opacity: .6;
+}
+
+.rack-rail::after {
+  background: linear-gradient(180deg, rgba(255, 255, 255, .06), transparent 15% 85%, rgba(0, 0, 0, .35));
+  opacity: .7;
+}
+
+
+/* Subtract border thickness so centerline is measured from the true outside edge */
+.rack-rail--left {
+  padding-left: calc($rail-centerline - ($hole / 2) - $edge);
+}
+
+.rack-rail--right {
+  padding-right: calc($rail-centerline - ($hole / 2) - $edge);
+}
+
+
+.rack-rail>.rack-rail__unit {
+  display: grid;
+  grid-template-rows: 1.47rem 2.25rem 1.47rem;
+  /* 0.5", 0.75", 0.5" */
+  // justify-items: start;   /* hole aligns from padded side */
+  align-items: center;
+  /* center holes vertically within each row */
+  position: relative;
+  border-top: 0.030rem solid rgba(255, 255, 255, .05);
+  border-bottom: 0.030rem solid rgba(0, 0, 0, .25);
+}
+
+/* Right rail flips horizontal alignment to the inside edge */
+.rack-rail--right>.rack-rail__unit {
+  justify-items: end;
+}
+
+/* Holes: center in their grid rows (no absolute positioning) */
+.rack-rail>.rack-rail__unit>i {
+  width: $hole;
+  /* 3/8" */
+  height: $hole;
+  /* 3/8" */
+  background: $hole-colour;
+  border-radius: 0.071rem;
+  box-shadow:
+    inset 0 0 0.035rem $steel-edge-lo,
+    inset 0.071rem 0.071rem 0.095rem rgba(0, 0, 0, .6),
+    inset -0.071rem -0.071rem 0.095rem $steel-edge-hi;
+  outline: 0.030rem solid rgba(0, 0, 0, .45);
+}

@@ -1,0 +1,11 @@
+<div class="rack-rail"
+    [class.rack-rail--left]="sideComputed() === 'left'"
+    [class.rack-rail--right]="sideComputed() === 'right'"
+    [attr.data-side]="sideComputed()"
+    [style.--units]="units()">
+    @for (u of ruArray(); track $index) {
+    <div class="rack-rail__unit">
+        <i></i><i></i><i></i>
+    </div>
+    }
+</div>

@@ -1,0 +1,298 @@
+@use 'variables'as *;
+
+$rack-ear-lip: 0.2rem;
+
+.q-sys-core-24f {
+  width: $rack-width;
+  height: $rack-unit;
+  display: flex;
+  flex-direction: row;
+  border-radius: 0.3rem;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(180deg, #2a2f34, #1a1f24, #0e1318);
+  box-shadow:
+    inset 0 0.0625rem 0 rgba(255, 255, 255, 0.08),
+    inset 0 -0.0625rem 0 rgba(0, 0, 0, 0.7),
+    0 0.125rem 0.5rem rgba(0, 0, 0, 0.5);
+
+  &__chassis {
+    flex: 1 0 0;
+    background: linear-gradient(180deg, #2a2f34, #1a1f24, #0e1318);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    align-items: center;
+    padding: 0.9rem 1rem;
+    gap: 1rem;
+
+    &__branding {
+      align-self: start;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+      gap: 0.1rem;
+      opacity: 0.85;
+      padding-top: 0.28rem;
+      text-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.5);
+
+      &--logo {
+        width: 3.6rem;
+      }
+
+      &--model {
+        font-weight: bold;
+        font-size: 0.5rem;
+        letter-spacing: 0.03125rem;
+      }
+
+      &--type {
+        font-size: 0.21rem;
+        letter-spacing: 0.01875rem;
+      }
+    }
+
+    &__vent {
+      background: linear-gradient(180deg, #353a40, #23272c);
+      border: 0.125rem solid rgba(10, 10, 10, 0.7);
+      border-radius: 0.4rem;
+      box-shadow:
+        inset 0 0.125rem 0.375rem rgba(0, 0, 0, .7),
+        inset 0 -0.0625rem 0 rgba(255, 255, 255, .04),
+        0 0.0625rem 0 rgba(255, 255, 255, .08);
+      height: 100%;
+      padding: 0.15rem;
+      position: relative;
+      width: 26.6rem;
+
+      &__holes {
+        --columns: 50;
+        --rows: 5;
+
+        background-clip: content-box;
+        background-image: radial-gradient(circle at center,
+            rgba(0, 0, 0, .95) 0%,
+            rgba(0, 0, 0, .65) 36%,
+            rgba(0, 0, 0, .70) 48%,
+            rgba(0, 0, 0, .30) 58%,
+            transparent 52%);
+        background-origin: content-box;
+        background-size: calc(100% / var(--columns)) calc(100% / var(--rows));
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    &__lcd-screen {
+      width: 18rem;
+      height: 100%;
+      /* Taller screen */
+      background:
+        /* Glossy plastic reflection */
+        linear-gradient(135deg,
+          rgba(255, 255, 255, 0.10) 0%,
+          rgba(255, 255, 255, 0.08) 25%,
+          transparent 50%,
+          rgba(0, 0, 0, 0.1) 75%,
+          rgba(0, 0, 0, 0.2) 100%),
+        /* Base plastic gradient */
+        linear-gradient(145deg, #1a1f24, #0f1419);
+      border: 0.14rem solid rgba(0, 0, 0, .75);
+      border-radius: 0.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.3rem 0.8rem;
+      box-shadow:
+        inset 0 0.125rem 0.125rem rgba(0, 0, 0, 0.5),
+        inset 0 -0.0625rem 0 rgba(255, 255, 255, 0.03),
+        /* Enhanced glossy highlight */
+        0 0.0625rem 0 rgba(255, 255, 255, 0.15),
+        0 0.125rem 0.5rem rgba(0, 0, 0, 0.3);
+      position: relative;
+
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.10) 0%,
+            rgba(255, 255, 255, 0.06) 50%,
+            transparent 100%);
+        border-radius: 0.2rem 0.2rem 0 0;
+        pointer-events: none;
+      }
+
+      &__text {
+        color: rgba(196, 240, 255, 0.7);
+        font-family: LCDDotTR;
+        font-size: 1.5rem;
+        font-weight: 400;
+        letter-spacing: 0.1rem;
+        line-height: 1.1rem;
+        text-align: center;
+        text-shadow: 0 0 0.5rem rgba(160, 240, 255, 0.6);
+        width: 13rem;
+      }
+
+      &__controls {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 0.1rem;
+        justify-content: space-between;
+        height: 100%;
+
+        &__power {
+
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+          justify-content: flex-end;
+
+
+          &--text {
+            color: #fff;
+            font-family: Arial, sans-serif;
+            font-size: 0.3rem;
+            letter-spacing: 0.0125rem;
+            opacity: 0.75;
+            width: 1.05rem;
+            text-shadow: 0 0.00625rem 0.00625rem rgba(0, 0, 0, 0.5);
+          }
+        }
+
+        &__menu {
+
+          display: flex;
+          flex-direction: row;
+          gap: 1.25rem;
+
+        }
+      }
+    }
+  }
+
+  &__rack-ear {
+    width: 2.6rem;
+    height: $rack-unit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(90deg, #2a2f34, #1e2328, #15191e);
+    box-shadow:
+      inset 0.0625rem 0 0 rgba(255, 255, 255, 0.06),
+      inset -0.0625rem 0 0 rgba(0, 0, 0, 0.6);
+    padding: calc(0.25rem - $screw-radius);
+    position: relative;
+
+    &--left {
+      align-items: flex-start;
+      padding-left: calc($rail-centerline - $screw-radius);
+      border-right: $rack-ear-lip solid rgba(0, 0, 0, .35);
+    }
+
+    &--right {
+      align-items: flex-end;
+      padding-right: calc($rail-centerline - $screw-radius);
+      border-left: $rack-ear-lip solid rgba(0, 0, 0, .35);
+    }
+  }
+}
+
+.led {
+  box-sizing: border-box;
+  border-radius: 0.1rem;
+  box-shadow: inset 0 0.0625rem 0 rgba(255, 255, 255, 0.3);
+  background: linear-gradient(90deg, #000000, #060606);
+  height: 0.3rem;
+  width: 0.6rem;
+  margin-right: 0.25rem;
+
+
+  &--power.active {
+    background: linear-gradient(90deg, #0099ff, #00aaff);
+    box-shadow:
+      0 0 0.25rem #00aaff,
+      inset 0 0.0625rem 0 rgba(255, 255, 255, 0.3);
+  }
+
+  &--id {
+    margin-right: 0.29rem;
+
+    &.active {
+      background: linear-gradient(90deg, #ff3300, #ff4400);
+      box-shadow:
+        0 0 0.25rem #ff6600,
+        inset 0 0.0625rem 0 rgba(255, 255, 255, 0.3);
+    }
+  }
+}
+
+.soft-button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 1.8rem;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    gap: 0.1rem;
+    opacity: 0.75;
+
+    &--connector {
+      border-right: solid 0.0625rem rgb(255, 255, 255);
+      border-top: solid 0.0625rem rgb(255, 255, 255);
+      height: 0.4rem;
+      margin: 0.1rem 0;
+      position: relative;
+      width: 0.5rem;
+      opacity: 0.9;
+    }
+
+    &--label {
+      font-family: Arial, sans-serif;
+      font-size: 0.3rem;
+      text-shadow: 0 0.0625rem 0.0625rem rgba(0, 0, 0, 0.5);
+      color: #fff;
+      text-align: center;
+      letter-spacing: 0.0125rem;
+      text-shadow: 0 0.00625rem 0.00625rem rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  &__button {
+    width: 0.95rem;
+    height: 0.95rem;
+    border-radius: 50%;
+    margin-right: -0.18rem;
+    margin-top: -0.0625rem;
+    padding: 0;
+    align-self: flex-end;
+    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+    border: 0.0625rem solid #000;
+    box-shadow:
+      inset 0 0.0625rem 0.0625rem rgba(255, 255, 255, 0.08),
+      inset 0 -10.0625rem 0.0625rem rgba(0, 0, 0, 0.8),
+      0 0.0625rem 0.125rem rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+    transition: all 0.1s ease;
+
+  }
+
+
+  &__button:active {
+    background: linear-gradient(145deg, #0a0a0a, #1a1a1a);
+    box-shadow:
+      inset 0 0.125rem 0.1875rem rgba(0, 0, 0, 0.9),
+      inset 0 -0.0625rem 0.0625rem rgba(255, 255, 255, 0.05),
+      0 0.0625rem 0.0625rem rgba(0, 0, 0, 0.8);
+    transform: translateY(0.0625rem);
+  }
+}

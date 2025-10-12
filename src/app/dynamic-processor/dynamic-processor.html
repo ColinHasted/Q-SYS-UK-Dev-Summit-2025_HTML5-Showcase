@@ -1,0 +1,276 @@
+<div class="dynamic-processor" [attr.data-rack-units]="1">
+  <div class="dynamic-processor__rack-ear dynamic-processor__rack-ear--left">
+    <app-rack-screw></app-rack-screw>
+    <app-rack-screw></app-rack-screw>
+  </div>
+
+  <div class="dynamic-processor__chassis">
+    <div class="dynamic-processor__chassis__badge">
+      <img class="qsys-logo" src="/assets/images/logo/q-sys-logo-black.svg" />
+      <div class="description">DYNAMIC PROCESSOR</div>
+    </div>
+    <div class="controls">
+      <div class="controls__io">
+        <app-dynamic-knob
+          [label]="'INPUT'"
+          [centerLabel]="'0'"
+          [minLabel]="'-20'"
+          [maxLabel]="'+20'"
+          [value]="gate.inputGainPosition()"
+          [min]="0"
+          [max]="1"
+          [step]="0.001"
+          (valueChange)="gate.SetInputGainPosition($event)"
+        ></app-dynamic-knob>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <div class="controls__processing controls__processing--gate">
+        <div class="controls__processing__header">
+          <div class="controls__processing__title">GATE</div>
+          <div class="controls__processing__meter">
+            <div class="status-led gate-led" [class.active]="gate.open()"></div>
+            <app-led-meter
+              [value]="gate.appliedGain()"
+              [min]="0"
+              [max]="-40"
+              [ledCount]="10"
+              [width]="'5rem'"
+              [height]="'0.6rem'"
+              [greenThreshold]="60"
+              [showScale]="true"
+              [yellowThreshold]="80"
+            >
+            </app-led-meter>
+          </div>
+        </div>
+        <div class="controls__processing__controls">
+          <app-dynamic-knob
+            [label]="'THRESHOLD'"
+            [minLabel]="'-60dB'"
+            [maxLabel]="'20'"
+            [value]="gate.thresholdLevelPosition()"
+            [min]="0"
+            [max]="1"
+            [step]="0.001"
+            (valueChange)="gate.SetThresholdLevelPosition($event)"
+          ></app-dynamic-knob>
+          <app-dynamic-knob
+            [label]="'DEPTH'"
+            [minLabel]="'0dB'"
+            [maxLabel]="'60'"
+            [value]="gate.depthPosition()"
+            [min]="0"
+            [max]="1"
+            [step]="0.001"
+            (valueChange)="gate.SetDepthPosition($event)"
+          ></app-dynamic-knob>
+          <app-dynamic-knob
+            [label]="'ATTACK'"
+            [minLabel]="'5ms'"
+            [maxLabel]="'100'"
+            [value]="gate.attackPosition()"
+            [min]="0"
+            [max]="1"
+            [step]="0.001"
+            (valueChange)="gate.SetAttackPosition($event)"
+          ></app-dynamic-knob>
+          <app-dynamic-knob
+            [label]="'HOLD'"
+            [minLabel]="'1ms'"
+            [maxLabel]="'10s'"
+            [value]="gate.holdTimePosition()"
+            [min]="0"
+            [max]="1"
+            [step]="0.001"
+            (valueChange)="gate.SetHoldTimePosition($event)"
+          ></app-dynamic-knob>
+          <app-dynamic-knob
+            [label]="'RELEASE'"
+            [minLabel]="'10ms'"
+            [maxLabel]="'10s'"
+            [value]="gate.releasePosition()"
+            [min]="0"
+            [max]="1"
+            [step]="0.001"
+            (valueChange)="gate.SetReleasePosition($event)"
+          ></app-dynamic-knob>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="section-divider"></div>
+
+      <!-- Compressor Section -->
+      <div class="controls__processing controls__processing--compressor">
+        <div class="controls__processing__header">
+          <div class="controls__processing__title">COMPRESSOR</div>
+          <div class="controls__processing__meter">
+            <div
+              class="status-led compressor-led"
+              [class.active]="compressor.appliedGain() < -0.1"
+            ></div>
+            <app-led-meter
+              [value]="compressor.appliedGain()"
+              [min]="0"
+              [max]="-40"
+              [ledCount]="10"
+              [width]="'6rem'"
+              [height]="'0.6rem'"
+              [greenThreshold]="60"
+              [showScale]="true"
+              [yellowThreshold]="80"
+            >
+            </app-led-meter>
+          </div>
+        </div>
+        <div class="controls__processing__controls">
+          <app-dynamic-knob
+            [label]="'THRESHOLD'"
+            [minLabel]="'--60dB'"
+            [maxLabel]="'20'"
+            [value]="compressor.thresholdLevelPosition()"
+            [min]="0"
+            [max]="1"
+            [step]="0.001"
+            (valueChange)="compressor.SetThresholdLevelPosition($event)"
+          ></app-dynamic-knob>
+          <app-dynamic-knob
+            [label]="'RATIO'"
+            [minLabel]="'1'"
+            [maxLabel]="'100'"
+            [value]="compressor.ratioPosition()"
+            [min]="0"
+            [max]="1"
+            [step]="0.001"
+            (valueChange)="compressor.setRatioPosition($event)"
+          ></app-dynamic-knob>
+          <app-dynamic-knob
+            [label]="'DEPTH'"
+            [minLabel]="'0dB'"
+            [maxLabel]="'60'"
+            [value]="compressor.depthPosition()"
+            [min]="0"
+            [max]="1"
+            [step]="0.001"
+            (valueChange)="compressor.SetDepthPosition($event)"
+          ></app-dynamic-knob>
+          <app-dynamic-knob
+            [label]="'KNEE'"
+            [minLabel]="'HARD'"
+            [maxLabel]="'SOFT'"
+            [value]="compressor.softKneePosition()"
+            [min]="0"
+            [max]="1"
+            [step]="0.001"
+            (valueChange)="compressor.SetSoftKneePosition($event)"
+          ></app-dynamic-knob>
+          <app-dynamic-knob
+            [label]="'ATTACK'"
+            [minLabel]="'5ms'"
+            [maxLabel]="'100'"
+            [value]="compressor.attackPosition()"
+            [min]="0"
+            [max]="1"
+            [step]="0.001"
+            (valueChange)="compressor.SetAttackPosition($event)"
+          ></app-dynamic-knob>
+          <app-dynamic-knob
+            [label]="'RELEASE'"
+            [minLabel]="'10ms'"
+            [maxLabel]="'10s'"
+            [value]="compressor.releasePosition()"
+            [min]="0"
+            [max]="1"
+            [step]="0.001"
+            (valueChange)="compressor.SetReleasePosition($event)"
+          ></app-dynamic-knob>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="section-divider"></div>
+
+      <!-- Limiter Section -->
+      <div class="controls__processing controls__processing--limiter">
+        <div class="controls__processing__header">
+          <div class="controls__processing__title">LIMITER</div>
+          <div class="controls__processing__meter">
+            <div
+              class="status-led limiter-led"
+              [class.active]="limiter.appliedGain() < -0.1"
+            ></div>
+            <app-led-meter
+              [value]="limiter.appliedGain()"
+              [min]="0"
+              [max]="-40"
+              [ledCount]="6"
+              [width]="'3rem'"
+              [height]="'0.6rem'"
+              [greenThreshold]="-10"
+              [showScale]="true"
+              [yellowThreshold]="-20"
+            >
+            </app-led-meter>
+          </div>
+        </div>
+        <div class="controls__processing__controls">
+          <app-dynamic-knob
+            [label]="'THRESHOLD'"
+            [minLabel]="'-60dB'"
+            [maxLabel]="'20'"
+            [value]="limiter.thresholdLevelPosition()"
+            [min]="0"
+            [max]="1"
+            [step]="0.001"
+            (valueChange)="limiter.SetThresholdLevelPosition($event)"
+          ></app-dynamic-knob>
+          <app-dynamic-knob
+            [label]="'ATTACK'"
+            [minLabel]="'5ms'"
+            [maxLabel]="'100'"
+            [value]="limiter.attackPosition()"
+            [min]="0"
+            [max]="1"
+            [step]="0.001"
+            (valueChange)="limiter.SetAttackPosition($event)"
+          ></app-dynamic-knob>
+          <app-dynamic-knob
+            [label]="'RELEASE'"
+            [minLabel]="'10ms'"
+            [maxLabel]="'10s'"
+            [value]="limiter.releasePosition()"
+            [min]="0"
+            [max]="1"
+            [step]="0.001"
+            (valueChange)="limiter.SetReleasePosition($event)"
+          ></app-dynamic-knob>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="section-divider"></div>
+
+      <!-- Output Knob -->
+      <div class="controls__io">
+        <app-dynamic-knob
+          [label]="'OUTPUT'"
+          [centerLabel]="'0'"
+          [minLabel]="'-20'"
+          [maxLabel]="'+20'"
+          [value]="limiter.outputGainPosition()"
+          [min]="0"
+          [max]="1"
+          [step]="0.005"
+          (valueChange)="limiter.SetOutputGainPosition($event)"
+        ></app-dynamic-knob>
+      </div>
+    </div>
+  </div>
+
+  <div class="dynamic-processor__rack-ear dynamic-processor__rack-ear--right">
+    <app-rack-screw></app-rack-screw>
+    <app-rack-screw></app-rack-screw>
+  </div>
+</div>

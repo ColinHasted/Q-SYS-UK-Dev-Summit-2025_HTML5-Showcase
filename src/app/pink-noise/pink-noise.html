@@ -1,0 +1,36 @@
+<div class="pink-noise-panel">
+  <div class="pink-noise-panel__rack-ear pink-noise-panel__rack-ear--left">
+    <app-rack-screw></app-rack-screw>
+    <app-rack-screw></app-rack-screw>
+  </div>
+
+  <div class="pink-noise-panel__chassis">
+    <div class="pink-noise-panel__title-section">
+      <img class="logo" src="/assets/icons/pink-noise.svg" />
+
+      <div class="pink-noise-panel__title">PINK NOISE</div>
+    </div>
+
+    <div class="pink-noise-panel__fader-section">
+      <div class="fader-controls">
+        <div class="mute-left">
+          <!-- TODO - Implement the mute click event-->
+          <!-- TODO - Implement the mute feedback -->
+
+          <button class="mute-button" [class.active]="Mute()" (click)="onMuteToggle()">
+            <div class="mute-led"></div>
+            <span class="mute-text">MUTE</span>
+          </button>
+        </div>
+        <!-- TODO - Implement the fader feedback & input event -->
+        <app-mixer-fader [value]="Gain()" [min]="-100" [max]="20" [step]="0.2" (input)="onGainChange($event)">
+        </app-mixer-fader>
+      </div>
+    </div>
+  </div>
+
+  <div class="pink-noise-panel__rack-ear pink-noise-panel__rack-ear--right">
+    <app-rack-screw></app-rack-screw>
+    <app-rack-screw></app-rack-screw>
+  </div>
+</div>
