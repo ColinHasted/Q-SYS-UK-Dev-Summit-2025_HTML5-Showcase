@@ -21,7 +21,7 @@ import { PinkNoiseComponent } from "./pink-noise/pink-noise";
 export class App implements OnInit {
   // Change this to your Core's IP address if different
   // Or use the `host` query parameter in the URL to override it
-  readonly coreIpAddress = '192.168.1.220';
+  readonly coreIpAddress = '10.130.61.82';
 
   readonly qrwcService = inject(QrwcAngularService);
   protected readonly title = signal('Q-SYS HTML5 Showcase');

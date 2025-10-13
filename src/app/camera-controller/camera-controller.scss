@@ -226,7 +226,7 @@
   &--center {
   background: linear-gradient(180deg, #424242, #222222);
 
-  &:active {
+  &.active {
         transform: scale(.95);
     background: linear-gradient(180deg, #323232, #121212);
   }
@@ -315,8 +315,8 @@
   transform: scale(.99);
 }
 
-/* Auto Framing - Green LED when active */
-.camera-btn--modifier[aria-label="Toggle Auto Framing"].active::before {
+/* Auto Framing - Green LED when selected */
+.camera-btn--modifier.selected::before {
   background: radial-gradient(circle at 30% 30%, #00ff88, #00cc66, #009944);
   box-shadow:
     inset 0 0 .06rem rgba(255, 255, 255, 0.3),
@@ -324,8 +324,8 @@
     0 0 .8rem rgba(0, 255, 136, 0.3);
 }
 
-/* Privacy - Red LED when active */
-.camera-btn--modifier[aria-label="Toggle Privacy Mode"].active::before {
+/* Privacy - Red LED when selected */
+.camera-btn--modifier.selected[aria-label*="Privacy"]::before {
   background: radial-gradient(circle at 30% 30%, #ff4444, #cc2222, #991111);
   box-shadow:
     inset 0 0 .06rem rgba(255, 255, 255, 0.3),

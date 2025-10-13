@@ -23,6 +23,8 @@ export class QrwcPtzCameraComponent {
   private readonly _presetHomeLoadBinding;
   private readonly _zoomInBinding;
   private readonly _zoomOutBinding;
+  private readonly _focusNearBinding;
+  private readonly _focusFarBinding;
   private readonly _panLeftBinding;
   private readonly _panRightBinding;
   private readonly _tiltUpBinding;
@@ -75,6 +77,9 @@ export class QrwcPtzCameraComponent {
     this._presetHomeLoadBinding = this.qrwc.bindControl(componentName, 'preset.home.load', false);
     this._zoomInBinding = this.qrwc.bindControl(componentName, 'zoom.in', false);
     this._zoomOutBinding = this.qrwc.bindControl(componentName, 'zoom.out', false);
+    this._focusNearBinding = this.qrwc.bindControl(componentName, 'focus.near', false);
+    this._focusFarBinding = this.qrwc.bindControl(componentName, 'focus.far', false);
+
     this._panLeftBinding = this.qrwc.bindControl(componentName, PtzDirection.Left, false);
     this._panRightBinding = this.qrwc.bindControl(componentName, PtzDirection.Right, false);
     this._tiltUpBinding = this.qrwc.bindControl(componentName, PtzDirection.Up, false);
@@ -132,6 +137,17 @@ export class QrwcPtzCameraComponent {
    */
   zoomOut(state: boolean) {
     this._zoomOutBinding.setValue(state);
+  }
+
+  focusNear(state: boolean) {
+    this._focusNearBinding.setValue(state);
+  }
+
+  focusFar(state: boolean) {
+    this._focusFarBinding.setValue(state);
+  }
+  focusAuto(){
+    this._autoFocusEnabledBinding.trigger();
   }
 
   /**

@@ -13,10 +13,7 @@
     <div class="camera-controller__lcd-window">
       <div class="camera-controller__lcd-window--lcd-frame">
         <div class="camera-controller__lcd-window__screen">
-          <img
-            class="camera-controller__lcd-window__screen--img"
-            [src]="previewImage()"
-          />
+          <img class="camera-controller__lcd-window__screen--img" [src]="previewImage()" />
         </div>
       </div>
     </div>
@@ -30,48 +27,46 @@
       <div class="camera-controller__controls__group">
         <div class="camera-controller__controls__group--label">PAN / TILT</div>
         <div class="camera-controller__ptz-grid">
-          <button class="camera-btn">
-            <img
-              style="transform: rotate(-45deg)"
-              src="assets/icons/navigation/up.svg"
-            />
+          <button class="camera-btn" (pointerdown)="move(PtzDirection.LeftUp, true, $event)"
+            (pointerup)="move(PtzDirection.LeftUp, false, $event)"
+            (pointerout)="move(PtzDirection.LeftUp, false, $event)">
+            <img style="transform: rotate(-45deg)" src="assets/icons/navigation/up.svg" />
           </button>
-          <button class="camera-btn">
+          <button class="camera-btn" (pointerdown)="move(PtzDirection.Up,true,$event)"
+            (pointerup)="move(PtzDirection.Up, false, $event)" (pointerout)="move(PtzDirection.Up, false, $event)">
             <img src="assets/icons/navigation/up.svg" />
           </button>
-          <button class="camera-btn">
-            <img
-              style="transform: rotate(45deg)"
-              src="assets/icons/navigation/up.svg"
-            />
+          <button class="camera-btn" (pointerdown)="move(PtzDirection.RightUp,true,$event)"
+            (pointerup)="move(PtzDirection.RightUp, false, $event)"
+            (pointerout)="move(PtzDirection.RightUp, false, $event)">
+            <img style="transform: rotate(45deg)" src="assets/icons/navigation/up.svg" />
           </button>
-          <button class="camera-btn">
+          <button class="camera-btn" (pointerdown)="move(PtzDirection.Left,true,$event)"
+            (pointerup)="move(PtzDirection.Left, false, $event)" (pointerout)="move(PtzDirection.Left, false, $event)">
             <img src="assets/icons/navigation/left.svg" />
           </button>
-          <button
-            class="camera-btn camera-btn--centre"
-            aria-label="Home Position"
-          >
+          <button class="camera-btn camera-btn--centre" aria-label="Home Position" (click)="PtzCamera.home()">
             <img src="assets/icons/navigation/home.svg" />
           </button>
-          <button class="camera-btn">
+          <button class="camera-btn" (pointerdown)="move(PtzDirection.Right,true,$event)"
+            (pointerup)="move(PtzDirection.Right, false, $event)"
+            (pointerout)="move(PtzDirection.Right, false, $event)">
             <img src="assets/icons/navigation/right.svg" />
           </button>
 
-          <button class="camera-btn">
-            <img
-              style="transform: rotate(45deg)"
-              src="assets/icons/navigation/down.svg"
-            />
+          <button class="camera-btn" (pointerdown)="move(PtzDirection.LeftDown,true,$event)"
+            (pointerup)="move(PtzDirection.LeftDown, false, $event)"
+            (pointerout)="move(PtzDirection.LeftDown, false, $event)">
+            <img style="transform: rotate(45deg)" src="assets/icons/navigation/down.svg" />
           </button>
-          <button class="camera-btn" aria-label="Tilt Down">
+          <button class="camera-btn" (pointerdown)="move(PtzDirection.Down,true,$event)"
+            (pointerup)="move(PtzDirection.Down, false, $event)" (pointerout)="move(PtzDirection.Down, false, $event)">
             <img src="assets/icons/navigation/down.svg" />
           </button>
-          <button class="camera-btn">
-            <img
-              style="transform: rotate(-45deg)"
-              src="assets/icons/navigation/down.svg"
-            />
+          <button class="camera-btn" (pointerdown)="move(PtzDirection.RightDown,true,$event)"
+            (pointerup)="move(PtzDirection.RightDown, false, $event)"
+            (pointerout)="move(PtzDirection.RightDown, false, $event)">
+            <img style="transform: rotate(-45deg)" src="assets/icons/navigation/down.svg" />
           </button>
         </div>
       </div>
@@ -83,37 +78,26 @@
         <div class="zoom-focus-controls">
           <div class="zoom-section">
             <div class="section-label">Zoom</div>
-            <button
-              class="camera-btn camera-btn--function"
-              aria-label="Zoom In"
-            >
+            <button class="camera-btn camera-btn--function" (pointerdown)="zoomIn(true, $event)"
+              (pointerup)="zoomIn(false, $event)" (pointerout)="zoomIn(false, $event)">
               <img src="assets/icons/camera/zoom-in.svg" />
             </button>
-            <button
-              class="camera-btn camera-btn--function"
-              aria-label="Zoom Out"
-            >
+            <button class="camera-btn camera-btn--function" (pointerdown)="zoomOut(true, $event)"
+              (pointerup)="zoomOut(false, $event)" (pointerout)="zoomOut(false, $event)">
               <img src="assets/icons/camera/zoom-out.svg" />
             </button>
           </div>
           <div class="focus-section">
             <div class="section-label">Focus</div>
-            <button
-              class="camera-btn camera-btn--function"
-              aria-label="Focus Near"
-            >
+            <button class="camera-btn camera-btn--function" (pointerdown)="focusNear(true, $event)"
+              (pointerup)="focusNear(false, $event)" (pointerout)="focusNear(false, $event)">
               <img style="width: 35%" src="assets/icons/camera/plus.svg" />
             </button>
-            <button
-              class="camera-btn camera-btn--function"
-              aria-label="Focus Far"
-            >
-              <img style="width: 35%"  src="assets/icons/camera/minus.svg" />
+            <button class="camera-btn camera-btn--function" (pointerdown)="focusFar(true, $event)"
+              (pointerup)="focusFar(false, $event)" (pointerout)="focusFar(false, $event)">
+              <img style="width: 35%" src="assets/icons/camera/minus.svg" />
             </button>
-            <button
-              class="camera-btn camera-btn--function"
-
-            >
+            <button class="camera-btn camera-btn--function" (click)="focusAuto()">
               <img style="width: 50%" src="assets/icons/camera/auto-focus.svg" />
             </button>
           </div>
@@ -125,15 +109,10 @@
         <div class="camera-controller__controls__group--label">PRESETS</div>
         <div class="camera-controller__ptz-grid">
           @for (n of [1,2,3,4,5,6,7,8,9]; track $index) {
-            <button
-              class="camera-btn camera-btn--preset"
-              aria-label="Preset {{n}}"
-              (pointerdown)="onPresetPress(n)"
-              (pointerup)="onPresetRelease(n)"
-              (pointercancel)="onPresetRelease(n)"
-            >
-              {{n}}
-            </button>
+          <button class="camera-btn camera-btn--preset" aria-label="Preset {{n}}" (pointerdown)="onPresetPress(n)"
+            (pointerup)="onPresetRelease(n)" (pointercancel)="onPresetRelease(n)">
+            {{n}}
+          </button>
           }
         </div>
       </div>
@@ -142,19 +121,22 @@
         <div class="modifier-controls">
           <div class="modifier-item">
             <div class="section-label">Auto<br />Framing</div>
-            <button
-              class="camera-btn camera-btn--modifier"
-              aria-label="Toggle Auto Framing"
-            >
+            <button class="camera-btn camera-btn--modifier" 
+            (pointerdown)="toggleAutoFraming(true, $event)"
+            (pointerup)="toggleAutoFraming(false, $event)"
+            (pointerout)="toggleAutoFraming(false, $event)"
+            [class.selected]="PtzCamera.autoFrameEnabled()">
               <img src="assets/icons/camera/auto-framing.svg" />
             </button>
           </div>
           <div class="modifier-item">
             <div class="section-label">Privacy</div>
-            <button
-              class="camera-btn camera-btn--modifier"
-              aria-label="Toggle Privacy Mode"
-            >
+            <button class="camera-btn camera-btn--modifier" 
+            (pointerdown)="togglePrivacyMode(true, $event)"
+            (pointerup)="togglePrivacyMode(false, $event)"
+            (pointerout)="togglePrivacyMode(false, $event)"
+            [class.selected]="PtzCamera.privacyEnabled()"
+            aria-label="Privacy">
               <img src="assets/icons/camera/privacy.svg" />
             </button>
           </div>
@@ -168,10 +150,7 @@
   </div>
   <div class="camera-controller__rack-ear camera-controller__rack-ear--right">
     <app-rack-screw></app-rack-screw>
-        <img
-      class="camera-controller__rack-ear__logo"
-      src="/assets/images/logo/q-sys-emblem-white.svg"
-    />
+    <img class="camera-controller__rack-ear__logo" src="/assets/images/logo/q-sys-emblem-white.svg" />
     <app-rack-screw></app-rack-screw>
   </div>
 </div>

@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Component, computed, HostBinding, OnDestroy } from '@angular/core';
+import { Component, computed, Directive, HostBinding, OnDestroy } from '@angular/core';
 import { RackScrewComponent } from '../equipment-rack/rack-screw/rack-screw';
 import { TorxScrewComponent } from '../equipment-rack/torx-screw/torx-screw';
-import { QrwcPtzCameraComponent } from '../qrwc/components/qrwc-camera-component';
+import { QrwcPtzCameraComponent,PtzDirection } from '../qrwc/components/qrwc-camera-component';
 import { QrwcSnapshotControllerComponent } from '../qrwc/components/qrwc-snapshot-controller-component';
 
 @Component({
@@ -15,6 +15,8 @@ import { QrwcSnapshotControllerComponent } from '../qrwc/components/qrwc-snapsho
 })
 export class CameraControllerComponent implements OnDestroy {
   @HostBinding('attr.data-rack-units') rackUnits = '2';
+
+  PtzDirection = PtzDirection; // Expose enum to template
 
   readonly PtzCamera: QrwcPtzCameraComponent;
   readonly SnapshotController: QrwcSnapshotControllerComponent;
@@ -112,6 +114,86 @@ export class CameraControllerComponent implements OnDestroy {
       clearTimeout(timerId);
       this.presetHoldTimers.delete(presetNumber);
     }
+  }
+
+  move(direction: PtzDirection, state: boolean, event: PointerEvent): void {
+    this.toggleActiveState(event, state);
+    this.PtzCamera.move(direction, state);
+  }
+
+    /**
+   * Handles the zoom-in action for the camera.
+   *
+   * @remarks
+   * This method controls the camera's zoom-in functionality by sending a digital signal to the control system.
+   *
+   * @param state The signal name or join number of the digital signal to set.
+   * @param event The value to set the digital signal.
+   */
+  zoomIn(state: boolean, event: PointerEvent) {
+    this.toggleActiveState(event, state);
+    this.PtzCamera.zoomIn(state);
+  }
+
+  /**
+   * Handles the zoom-out action for the camera.
+   *
+   * @remarks
+   * This method controls the camera's zoom-out functionality by sending a digital signal to the control system.
+   *
+   * @param state Indicates whether to start (true) or stop (false) zooming out.
+   * @param event The pointer event associated with the zoom-out action.
+   */
+  zoomOut(state: boolean, event: PointerEvent) {
+    this.toggleActiveState(event, state);
+    this.PtzCamera.zoomOut(state);
+  }
+
+  focusNear(state: boolean, event: PointerEvent) {
+    this.toggleActiveState(event, state);
+    this.PtzCamera.focusNear(state);
+  }
+
+  focusFar(state: boolean, event: PointerEvent) {
+    this.toggleActiveState(event, state);
+    this.PtzCamera.focusFar(state);
+  }
+
+  focusAuto(){
+    this.PtzCamera.focusAuto();
+  }
+
+    /**
+   * Enables the auto-framing feature of the camera.
+   *
+   * @remarks
+   * This method enables the camera's auto-framing functionality, allowing it to automatically adjust its position and zoom to frame the subject.
+   *
+   * @param state Indicates whether to enable (true) or disable (false) auto-framing.
+   * @param event The pointer event associated with the auto-framing action.
+   */
+  toggleAutoFraming(state: boolean, event: PointerEvent) {
+    this.toggleActiveState(event, state);
+    if (state) this.PtzCamera.toggleAutoFraming();
+  }
+
+  togglePrivacyMode(state: boolean, event: PointerEvent) {
+    this.toggleActiveState(event, state);
+    if (state) this.PtzCamera.togglePrivacy();
+  }
+
+
+  /**
+   * Toggles the 'active' class on the event's target element based on the given state.
+   *
+   * @remarks
+   * This utility method is used to visually indicate an active state on the UI by toggling a CSS class.
+   *
+   * @param event The pointer event that triggered the action.
+   * @param state The desired state to reflect on the target element (true adds the class, false removes it).
+   */
+  toggleActiveState(event: PointerEvent, state: boolean): void {
+    (event.target as HTMLElement).classList.toggle('active', state);
   }
 
   /**
