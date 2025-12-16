@@ -1,10 +1,10 @@
 import { Component, input, output, computed, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-parametric-knob',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './parametric-knob.html',
   styleUrls: ['./parametric-knob.scss']
 })

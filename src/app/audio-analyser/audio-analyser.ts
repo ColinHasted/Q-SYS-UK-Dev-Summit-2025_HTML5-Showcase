@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { Component, HostBinding } from '@angular/core';
 import { RackScrewComponent } from '../equipment-rack/rack-screw/rack-screw';
@@ -10,7 +10,7 @@ import { PhaseComponent } from './components/phase/phase.component';
 @Component({
   selector: 'app-audio-analyser',
   standalone: true,
-  imports: [CommonModule, FormsModule, RackScrewComponent, TorxScrewComponent, MagnitudeComponent, RtaComponent,PhaseComponent],
+  imports: [FormsModule, RackScrewComponent, TorxScrewComponent, MagnitudeComponent, RtaComponent, PhaseComponent],
   templateUrl: './audio-analyser.html',
   styleUrl: './audio-analyser.scss'
 })

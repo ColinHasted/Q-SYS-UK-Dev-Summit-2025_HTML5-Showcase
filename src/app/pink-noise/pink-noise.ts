@@ -1,5 +1,5 @@
 import { Component, HostBinding, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RackScrewComponent } from '../equipment-rack/rack-screw/rack-screw';
 import { MixerFaderComponent } from './mixer-fader/mixer-fader';
 import { QrwcAngularService } from '../qrwc/qrwc-angular-service';
@@ -8,7 +8,7 @@ import { QrwcControlBinding } from '../qrwc/qrwc-control-binding';
 @Component({
   selector: 'app-pink-noise',
   standalone: true,
-  imports: [CommonModule, RackScrewComponent, MixerFaderComponent],
+  imports: [RackScrewComponent, MixerFaderComponent],
   templateUrl: './pink-noise.html',
   styleUrls: ['./pink-noise.scss']
 })

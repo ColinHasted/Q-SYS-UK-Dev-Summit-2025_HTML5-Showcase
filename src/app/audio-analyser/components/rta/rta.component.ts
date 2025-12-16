@@ -128,10 +128,8 @@ export class RtaComponent implements AfterViewInit {
               },
             },
           }
-
         }
       }
     });
   }
-
 }

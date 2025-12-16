@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { Component, signal, HostBinding, computed } from '@angular/core';
 import { RackScrewComponent } from '../equipment-rack/rack-screw/rack-screw';
@@ -8,7 +8,7 @@ import { AudioPlayerVolumeKnobComponent } from './volume-knob/volume-knob';
 @Component({
   selector: 'app-audio-player',
   standalone: true,
-  imports: [CommonModule, FormsModule, RackScrewComponent, AudioPlayerVolumeKnobComponent],
+  imports: [FormsModule, RackScrewComponent, AudioPlayerVolumeKnobComponent],
   templateUrl: './audio-player.html',
   styleUrl: './audio-player.scss'
 })

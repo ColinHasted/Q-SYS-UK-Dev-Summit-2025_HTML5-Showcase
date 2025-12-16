@@ -26,3 +26,9 @@
  */
 
 export { QrwcControlBinding } from './qrwc-control-binding';
+
+// Export component wrappers
+export { QrwcMeterComponent } from './components/qrwc-meter-component';
+export { QrwcLimiterComponent } from './components/qrwc-limiter-component';
+export { QrwcCompressorComponent } from './components/qrwc-compressor-component';
+export { QrwcGateComponent } from './components/qrwc-gate-component';

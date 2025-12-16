@@ -6,10 +6,7 @@ import {
   effect,
   computed,
 } from '@angular/core';
-import { Qrwc, Component, Control } from '@q-sys/qrwc';
-import {
-  IQrwcControlState
-} from './IQrwcControlState';
+import { Qrwc, Component, Control, IControlState } from '@q-sys/qrwc';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +27,7 @@ export class QrwcAngularService implements OnDestroy {
   /** Signal indicating if QRWC is initialized and connected */
   public readonly initialized = signal(false);
   /** Signal storing the current QRWC components records */
-  public readonly components = signal<Record<string, Component<string>>>({});
+  public readonly components = signal<Record<string, Component<string> | undefined>>({});
 
   constructor() {
   }
@@ -59,6 +56,7 @@ export class QrwcAngularService implements OnDestroy {
         console.log('QRWC instance created successfully:');
         console.log('QRWC Components:', Object.keys(qrwc.components));
 
+
         qrwc.on('disconnected', (reason: string) => {
           console.log('QRWC disconnected, attempting to reconnect...', reason);
           this.initialized.set(false);
@@ -70,7 +68,7 @@ export class QrwcAngularService implements OnDestroy {
         this.components.set(qrwc.components);
 
         qrwc.on('update', (component, control, state) => {
-       /*   console.log(
+       /*  console.log(
             `[Global] ${component.name}.${control.name} updated:`,
             state
           );*/
@@ -137,6 +135,7 @@ export class QrwcAngularService implements OnDestroy {
         : null;
     });
   }
+  
 
   /**
    * Create a callable control binding with automatic type inference.
@@ -181,8 +180,9 @@ export class QrwcAngularService implements OnDestroy {
     useLog: boolean = false
   ) {
     const controlSignal = signal<Control | null>(null);
-    const stateSignal = signal<IQrwcControlState | null>(null);
+    const stateSignal = signal<IControlState | null>(null);
     let cleanupFn: (() => void) | undefined;
+
     // Lazy computed properties
     const connected = computed(() => controlSignal() !== null);
     const state = computed(() => stateSignal());
@@ -197,7 +197,9 @@ export class QrwcAngularService implements OnDestroy {
 
     // Setup binding
     effect(() => {
-      const control = this.components()?.[componentName]?.controls[controlName];
+      const components = this.components();
+      const component = components?.[componentName];
+      const control = component?.controls[controlName];
 
       // Cleanup previous subscription
       cleanupFn?.();
@@ -211,11 +213,11 @@ export class QrwcAngularService implements OnDestroy {
 
       // Set the control and initial state
       controlSignal.set(control);
-      stateSignal.set(control.state as IQrwcControlState);
+      stateSignal.set(control.state);
 
       // Subscribe to updates
-      const updateHandler = (newState: any) => {
-        stateSignal.set(newState as IQrwcControlState);
+      const updateHandler = (newState: IControlState) => {
+        stateSignal.set(newState);
       };
 
       control.on('update', updateHandler);
@@ -253,7 +255,7 @@ export class QrwcAngularService implements OnDestroy {
       min: Signal<number>;
       max: Signal<number>;
       values: Signal<number[]>;
-      state: Signal<IQrwcControlState | null>;
+      state: Signal<IControlState | null>;
       connected: Signal<boolean>;
       setValue: (v: number | string | boolean) => void;
       setPosition: (position: number) => void;

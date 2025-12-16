@@ -1,7 +1,7 @@
 import { Signal, signal, effect, computed } from '@angular/core';
 import { QrwcAngularService } from './qrwc-angular-service';
-import { IQrwcControlState } from './IQrwcControlState';
 import { Control } from '@q-sys/qrwc';
+import { IControlState } from '@q-sys/qrwc';
 
 /**
  * A complete binding to a Q-SYS control with reactive access to all properties.
@@ -31,7 +31,7 @@ import { Control } from '@q-sys/qrwc';
  */
 export class QrwcControlBinding {
   private readonly controlSignal = signal<Control | null>(null);
-  private readonly stateSignal = signal<IQrwcControlState | null>(null);
+  private readonly stateSignal = signal<IControlState | null>(null);
   private cleanupFn?: () => void;
 
   // Lazy computed properties - only calculate when accessed
@@ -76,11 +76,11 @@ export class QrwcControlBinding {
 
       // Set the control and initial state
       this.controlSignal.set(control);
-      this.stateSignal.set(control.state as IQrwcControlState);
+      this.stateSignal.set(control.state);
 
       // Subscribe to updates
-      const updateHandler = (newState: any) => {
-        this.stateSignal.set(newState as IQrwcControlState);
+      const updateHandler = (newState: IControlState) => {
+        this.stateSignal.set(newState);
       };
 
       control.on('update', updateHandler);

@@ -1,0 +1,25 @@
+<div class="stereo-vu-meter">
+  <div class="stereo-vu-meter__rack-ear stereo-vu-meter__rack-ear--left">
+    <app-rack-screw></app-rack-screw>
+    <app-rack-screw></app-rack-screw>
+  </div>
+  <div class="stereo-vu-meter__chassis">
+    <div class="vu-meter-panel">
+      <!-- VU Meters Container -->
+      <div class="vu-meters-container">
+        <!-- Left VU Meter -->
+        <app-vu-meter [level]="leftLevel()" [channel]="'LEFT'">
+        </app-vu-meter>
+
+        <!-- Right VU Meter -->
+        <app-vu-meter [level]="rightLevel()" [channel]="'RIGHT'" >
+        </app-vu-meter>
+      </div>
+    </div>
+  </div>
+  <div class="stereo-vu-meter__rack-ear stereo-vu-meter__rack-ear--right">
+    <app-rack-screw></app-rack-screw>
+    <app-rack-screw></app-rack-screw>
+  </div>
+
+</div>

@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, ElementRef, computed, inject, input } from '@angular/core';
 
 @Component({
   selector: 'app-rack-rails',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './rack-rails.html',
   styleUrl: './rack-rails.scss'
 })

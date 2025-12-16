@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { AfterViewInit, Component, effect, HostBinding } from '@angular/core';
 import { RackScrewComponent } from '../equipment-rack/rack-screw/rack-screw';
@@ -27,11 +27,10 @@ function remapQRWCEqBands(eqBands: EQBand[]): ParametricEQBand[] {
   selector: 'app-parametric-eq',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     RackScrewComponent,
-    ParametricKnobComponent,
-  ],
+    ParametricKnobComponent
+],
   templateUrl: './parametric-eq.html',
   styleUrl: './parametric-eq.scss',
 })

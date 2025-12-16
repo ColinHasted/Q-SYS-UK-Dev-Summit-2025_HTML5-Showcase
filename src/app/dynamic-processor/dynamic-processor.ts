@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { Component, effect, HostBinding } from '@angular/core';
 import { RackScrewComponent } from '../equipment-rack/rack-screw/rack-screw';
@@ -11,7 +11,7 @@ import { QrwcLimiterComponent } from '../qrwc/components/qrwc-limiter-component'
 @Component({
   selector: 'app-dynamic-processor',
   standalone: true,
-  imports: [CommonModule, FormsModule, RackScrewComponent, DynamicKnobComponent, LedMeterComponent],
+  imports: [ RackScrewComponent, DynamicKnobComponent, LedMeterComponent],
   templateUrl: './dynamic-processor.html',
   styleUrl: './dynamic-processor.scss'
 })

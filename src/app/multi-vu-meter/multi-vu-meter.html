@@ -1,0 +1,44 @@
+<div class="multi-vu-meter" [attr.data-rack-units]="1">
+  <div class="multi-vu-meter__rack-ear multi-vu-meter__rack-ear--left">
+    <app-rack-screw></app-rack-screw>
+    <app-rack-screw></app-rack-screw>
+  </div>
+  <div class="multi-vu-meter__chassis">
+    <!-- Individual mini VU meters -->
+    <div class="mini-meters-container">
+      @for (channel of channels; track channel; let i = $index) {
+      <div class="mini-meter">
+        <!-- Meter well -->
+        <div class="meter-well">
+          <!-- SVG Scale -->
+          <img class="mini-scale" src="assets/icons/vu/vu-scale-1.svg" alt="VU Scale">
+
+          <!-- VU Label -->
+          <div class="vu-label">VU</div>
+
+          <!-- Channel number (bottom left) -->
+          <div class="channel-number">{{ channel }}</div>
+          
+          <!-- Peak indicator (bottom right) -->
+          <div class="peak-indicator">
+            
+            <div class="peak-led" [class.active]="meterStates[i].peak()"></div>
+          <div class="peak-label">PEAK</div>
+
+          </div>
+
+          <!-- Needle -->
+                           <!-- Needle pivot cutout -->
+                <div class="needle-cutout"></div>
+                
+          <div class="needle" [style.transform]="meterStates[i].needleTransform()"></div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+  <div class="multi-vu-meter__rack-ear multi-vu-meter__rack-ear--right">
+    <app-rack-screw></app-rack-screw>
+    <app-rack-screw></app-rack-screw>
+  </div>
+</div>

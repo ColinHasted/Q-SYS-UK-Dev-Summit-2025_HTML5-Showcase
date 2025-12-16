@@ -1,0 +1,220 @@
+@use '../scss/variables' as *;
+
+.multi-vu-meter {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $rack-unit;
+  width: $rack-width;
+
+  border-radius: 0.5rem;
+  background: linear-gradient(180deg,
+      #4a4a4a 0%,
+      #3a3a3a 20%,
+      #2e2e2e 50%,
+      #2a2a2a 100%);
+
+  &__rack-ear {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: calc(0.25rem - $screw-radius);
+    position: relative;
+
+    &--left {
+      align-items: flex-start;
+      padding-left: calc($rail-centerline - $screw-radius);
+    }
+
+    &--right {
+      align-items: flex-end;
+      padding-right: calc($rail-centerline - $screw-radius);
+    }
+  }
+
+  &__chassis {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
+    padding: 0.375rem 0.75rem;
+    width: 100%;
+  }
+}
+
+.mini-meters-container {
+  display: flex;
+  gap: 0.25rem;
+  flex: 1;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mini-meter {
+  flex: 0 1 auto;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.meter-well {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-height: 3.6rem;
+  max-width: 6rem;
+  aspect-ratio: 2.6 / 1;
+  background: #000000;
+  border-radius: 0.25rem;
+  border: 0.125rem solid #1a1a1a;
+
+  box-shadow:
+    inset 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.8),
+    0 0.0625rem 0 rgba(255, 255, 255, 0.05);
+
+  overflow: hidden;
+}
+
+.mini-scale {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 92%;
+  height: 82%;
+  object-fit: contain;
+  z-index: 1;
+  
+  filter: 
+    brightness(1.5) 
+    saturate(1.6) 
+    contrast(1.2)
+    hue-rotate(-5deg);
+  opacity: 1;
+  pointer-events: none;
+}
+
+.vu-label {
+  position: absolute;
+  bottom: 0.8rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: #ffcc00;
+  text-shadow: 0 0 0.125rem rgba(255, 204, 0, 0.6);
+  letter-spacing: 0.0625rem;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.channel-number {
+  position: absolute;
+  bottom: 0.1875rem;
+  left: 0.25rem;
+
+  font-size: 0.5rem;
+  font-weight: 700;
+  color: rgba(255, 200, 100, 0.9);
+  text-shadow: 
+    0 0 0.0625rem rgba(255, 204, 0, 0.4),
+    0 0.0625rem 0.0625rem rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.03125rem;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.peak-indicator {
+  position: absolute;
+  bottom: 0.87rem;
+  right: 0.42rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.0625rem;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.peak-led {
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%,
+    #621a1a 0%,
+    #8b0000 70%,
+    #880000 100%);
+  border: 0.03125rem solid rgba(0, 0, 0, 0.6);
+  box-shadow: 
+    inset 0.03125rem 0.03125rem 0.0625rem rgba(255, 255, 255, 0.3),
+    inset -0.03125rem -0.03125rem 0.0625rem rgba(0, 0, 0, 0.5);
+  
+  // Add glow when active (can be toggled with class later)
+  &.active {
+    background: radial-gradient(circle at 30% 30%,
+      #ff6666 0%,
+      #ff0000 70%,
+      #cc0000 100%);
+    box-shadow: 
+      0 0 0.25rem rgba(255, 0, 0, 0.8),
+      0 0 0.5rem rgba(255, 0, 0, 0.4),
+      inset 0.03125rem 0.03125rem 0.0625rem rgba(255, 255, 255, 0.5);
+  }
+}
+
+.peak-label {
+  font-size: 0.19rem;
+  font-weight: 700;
+  color: rgba(255, 200, 100, 0.7);
+  text-shadow: 0 0.0625rem 0.0625rem rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.03125rem;
+}
+
+.needle {
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  transform-origin: bottom center;
+
+  width: 0.0625rem;
+  height: 82%;
+  
+  background: linear-gradient(180deg,
+    transparent 0%,
+    #ffcc00 20%,
+    #ffaa00 100%
+  );
+
+  transform: translateX(-50%) rotate(-45deg);
+  pointer-events: none;
+  z-index: 2;
+
+  // Bright glow
+  filter: drop-shadow(0 0 0.125rem rgba(255, 204, 0, 0.8));
+}
+
+.needle-cutout {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 1.8rem;
+    height: 0.4rem;
+
+    // Elliptical cutout shape - taller curve on top
+    border-radius: 1rem 1rem 0 0 / .5rem .5rem 0 0;
+    // Black recessed cutout effect
+    background: black;
+
+    box-shadow:
+        inset 0 -0.125rem 0.1875rem rgba(0, 0, 0, 0.8),
+        inset 0 -0.0625rem 0.25rem rgba(0, 0, 0, 0.6);
+
+    z-index: 5;
+    pointer-events: none;
+}

@@ -11,17 +11,20 @@ import { BlankPanelComponent } from "./blank-panel/blank-panel";
 import { DynamicProcessorComponent } from "./dynamic-processor/dynamic-processor";
 import { CameraControllerComponent } from './camera-controller/camera-controller';
 import { PinkNoiseComponent } from "./pink-noise/pink-noise";
+import { StereoVuMeterComponent } from "./stereo-vu-meter/stereo-vu-meter";
+import { MultiVuMeterComponent } from "./multi-vu-meter/multi-vu-meter";
+import { DualVuMeterComponent } from "./dual-vu-meter/dual-vu-meter";
 
 @Component({
   selector: 'app-root',
-  imports: [EquipmentRack, VentPlateComponent,  Core24fComponent, GraphicEqComponent, ParametricEqComponent, CameraControllerComponent, AudioAnalyserComponent, AudioPlayerComponent, BlankPanelComponent, DynamicProcessorComponent, CameraControllerComponent, PinkNoiseComponent],
+  imports: [EquipmentRack, VentPlateComponent,  Core24fComponent, GraphicEqComponent, ParametricEqComponent, CameraControllerComponent, AudioAnalyserComponent, AudioPlayerComponent, BlankPanelComponent, DynamicProcessorComponent, CameraControllerComponent, PinkNoiseComponent, StereoVuMeterComponent, MultiVuMeterComponent, DualVuMeterComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App implements OnInit {
   // Change this to your Core's IP address if different
   // Or use the `host` query parameter in the URL to override it
-  readonly coreIpAddress = '10.130.61.82';
+  readonly coreIpAddress = '192.168.1.220';
 
   readonly qrwcService = inject(QrwcAngularService);
   protected readonly title = signal('Q-SYS HTML5 Showcase');

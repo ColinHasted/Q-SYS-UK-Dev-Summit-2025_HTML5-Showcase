@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { Component, computed, Directive, HostBinding, OnDestroy } from '@angular/core';
 import { RackScrewComponent } from '../equipment-rack/rack-screw/rack-screw';
@@ -9,7 +9,7 @@ import { QrwcSnapshotControllerComponent } from '../qrwc/components/qrwc-snapsho
 @Component({
   selector: 'app-camera-controller',
   standalone: true,
-  imports: [CommonModule, FormsModule, RackScrewComponent, TorxScrewComponent],
+  imports: [FormsModule, RackScrewComponent, TorxScrewComponent],
   templateUrl: './camera-controller.html',
   styleUrl: './camera-controller.scss',
 })

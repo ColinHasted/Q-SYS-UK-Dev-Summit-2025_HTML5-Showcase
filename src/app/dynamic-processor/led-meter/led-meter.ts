@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, computed, input } from '@angular/core';
 
 @Component({
   selector: 'app-led-meter',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './led-meter.html',
   styleUrl: './led-meter.scss'
 })

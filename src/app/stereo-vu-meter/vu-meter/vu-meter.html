@@ -1,0 +1,25 @@
+<div class="vu-meter">
+  <div class="vu-meter-frame">
+    <div class="vu-meter-face">
+      <!-- SVG Scale Background -->
+      <img class="vu-scale" src="assets/icons/vu/vu-scale-3.svg" alt="VU Scale">
+      
+      <div class="vu-label">VU</div>
+      
+      <div class="needle" [style.transform]="'rotate(' + currentAngle()+ 'deg)'"></div>
+      
+      <div class="glass-overlay"></div>
+    </div>
+  </div>
+  
+  <div class="vu-meter-body">
+    <div class="channel-label">{{ channel() }}</div>
+    
+    <div class="logo-container">
+       <img class="qsys-logo-background" src="assets/images/logo/q-sys-hexagon-background.svg" alt="Q-SYS Logo">
+      <img class="qsys-logo" src="assets/images/logo/q-sys-emblem-vu.svg" alt="Q-SYS Logo">
+    </div>
+    
+    <app-torx-screw class="meter-screw"></app-torx-screw>
+  </div>
+</div>

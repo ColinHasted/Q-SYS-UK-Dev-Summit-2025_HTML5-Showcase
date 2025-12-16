@@ -1,0 +1,70 @@
+<div class="dual-vu-meter" [attr.data-rack-units]="2">
+    <div class="dual-vu-meter__rack-ear dual-vu-meter__rack-ear--left">
+        <app-rack-screw></app-rack-screw>
+        <app-rack-screw></app-rack-screw>
+    </div>
+      <div class="dual-vu-meter__chassis">
+    <!-- Main housing frame -->
+    <div class="meter-housing">
+        <!-- Left meter -->
+        <div class="meter-unit">
+            <div class="meter-face">
+                <!-- SVG Scale -->
+                <img class="vu-scale" src="assets/icons/vu/vu-scale-3.svg" alt="VU Scale">
+
+                <!-- VU Label -->
+                <div class="vu-label">VU</div>
+
+                
+                <!-- Needle pivot cutout -->
+                <div class="needle-cutout"></div>
+                
+                <!-- Needle -->
+                <div class="needle" [style.transform]="meterStates[0].needleTransform()"></div>
+
+                <!-- Glass overlay -->
+                <div class="glass-overlay"></div>
+            </div>
+
+            <!-- Channel label -->
+            <div class="channel-label">LEFT</div>
+        </div>
+
+        <!-- Center divider with Q-SYS logo -->
+        <div class="center-divider">
+
+        </div>
+
+        <!-- Right meter -->
+        <div class="meter-unit">
+            <div class="meter-face">
+                <!-- SVG Scale -->
+                <img class="vu-scale" src="assets/icons/vu/vu-scale-3.svg" alt="VU Scale">
+
+                <!-- VU Label -->
+                <div class="vu-label">VU</div>
+
+                
+                <!-- Needle pivot cutout -->
+                <div class="needle-cutout"></div>
+                
+                <!-- Needle -->
+                <div class="needle" [style.transform]="meterStates[1].needleTransform()"></div>
+
+                <!-- Glass overlay -->
+                <div class="glass-overlay"></div>
+            </div>
+
+            <!-- Channel label -->
+            <div class="channel-label">RIGHT</div>
+        </div>
+    </div>
+
+
+</div>
+
+    <div class="dual-vu-meter__rack-ear dual-vu-meter__rack-ear--right">
+        <app-rack-screw></app-rack-screw>
+        <app-rack-screw></app-rack-screw>
+    </div>
+</div>

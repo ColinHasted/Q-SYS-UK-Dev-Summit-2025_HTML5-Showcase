@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 interface ScaleTick {
   position: number;
@@ -13,7 +13,7 @@ interface ScaleLabel {
 @Component({
   selector: 'app-mixer-fader',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './mixer-fader.html',
   styleUrls: ['./mixer-fader.scss']
 })

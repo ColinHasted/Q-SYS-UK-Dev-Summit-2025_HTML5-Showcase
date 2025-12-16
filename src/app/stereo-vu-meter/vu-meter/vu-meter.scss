@@ -1,0 +1,224 @@
+@use '../../scss/variables' as *;
+
+.vu-meter {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.vu-meter-frame {
+  position: relative;
+  width: 13.75rem;
+  height: 6.875rem;
+  
+  background: linear-gradient(180deg, 
+    #505050 0%,
+    #3e3e3e 15%,
+    #2a2a2a 40%,
+    #2a2a2a 100% 
+  );
+  
+
+  border: 0.0625rem solid #0a0a0a;
+  border-bottom: none;
+  border-radius: 0.25rem 0.25rem 0 0;
+  padding: 0.5rem;
+  padding-bottom: 0;
+  
+  // Clean modern bevel
+  box-shadow: 
+    /* Sharp outer edge */
+    0 0.0625rem 0 rgba(255, 255, 255, 0.1),
+    /* Smooth inner bevel */
+    inset 0 0.125rem 0.125rem rgba(255, 255, 255, 0.15),
+    inset 0.0625rem 0 0.0625rem rgba(255, 255, 255, 0.08),
+    inset -0.0625rem 0 0.0625rem rgba(0, 0, 0, 0.4);
+}
+
+.vu-meter-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  
+  // Warm incandescent lighting - cleaner, less textured
+  background:
+    /* Incandescent glow from bottom */
+    radial-gradient(ellipse 120% 80% at 50% 120%, 
+      rgba(255, 220, 150, 0.35) 0%,
+      rgba(255, 200, 120, 0.2) 30%,
+      rgba(255, 180, 100, 0.1) 60%,
+      transparent 80%),
+    /* Vintage cream base */
+    linear-gradient(180deg, 
+      #faf6ed 0%,
+      #f5f0e4 50%,
+      #ede5d5 100%);
+  
+  border: none;
+  border-radius: 0.125rem;
+  overflow: visible;
+  
+  // Complete inset bevel all around
+  box-shadow:
+    // All four sides
+    inset 0 0 0.5rem rgba(0, 0, 0, 0.25),
+    inset 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.2),
+    inset -0.125rem -0.125rem 0.25rem rgba(0, 0, 0, 0.15),
+    inset 0 0.1875rem 0.375rem rgba(0, 0, 0, 0.2);
+}
+
+// SVG Scale
+.vu-scale {
+  position: absolute;
+  top: 0;
+  left: 5%;
+  width: 90%;
+  height: 75%; // Reduced to make room for VU label
+  object-fit: contain;
+  z-index: 1;
+  opacity: 0.9;
+}
+
+// Glass overlay effect - cleaner
+.glass-overlay {
+  position: absolute;
+  top: -0.125rem;
+  left: -0.125rem;
+  right: -0.125rem;
+  bottom: -0.125rem;
+  pointer-events: none;
+  z-index: 5;
+  border-radius: 0.125rem;
+  
+  // Subtle glass reflection
+  background: linear-gradient(to bottom,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    transparent 50%);
+}
+
+.needle {
+  position: absolute;
+  // Anchor in the centre of the Q-SYS Logo.
+  bottom: -0.4rem;
+  left: 50%;
+  width: 0.0625rem; // Constant thin width
+  height: 5.6rem; // Longer to cover whole scale
+  background: #d32f2f; // Solid red
+  transform-origin: bottom center;
+ 
+  z-index: 3;
+  filter: drop-shadow(0 0.0625rem 0.125rem rgba(0, 0, 0, 0.4));
+}
+
+// Black body at bottom - continuous metal piece
+.vu-meter-body {
+  position: relative;
+  width: 13.75rem;
+  height: 2.5rem;
+  margin-top: -0.0625rem;
+  
+  // Clean smooth metal continuation
+  background: linear-gradient(180deg,
+    #2a2a2a 0%,
+    #1e1e1e 30%,
+    #0f0f0f 70%,
+    #050505 100%);
+  
+  border-left: 0.0625rem solid #0a0a0a;
+  border-right: 0.0625rem solid #0a0a0a;
+  border-bottom: 0.0625rem solid #0a0a0a;
+  border-top: none;
+  border-radius: 0 0 0.25rem 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.75rem;
+  padding-top: 0.0625rem;
+  
+  // Clean modern shadows
+  box-shadow:
+    0 0.25rem 0.5rem rgba(0, 0, 0, 0.6),
+    inset 0 -0.0625rem 0.0625rem rgba(0, 0, 0, 0.6),
+    inset 0.0625rem 0 0.0625rem rgba(255, 255, 255, 0.08),
+    inset -0.0625rem 0 0.0625rem rgba(0, 0, 0, 0.4);
+  
+  .channel-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.625rem; // Smaller
+    font-weight: bold;
+    color: #a0a0a0; // More subtle gray
+    letter-spacing: 0.0625rem;
+    text-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.8);
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+// Logo container integrated into metal
+.logo-container {
+  position: absolute;
+  left: 50%;
+  top: -1rem;
+  transform: translateX(-50%);
+  z-index: 6;
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+
+.qsys-logo-background {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 7;
+  
+}
+
+.qsys-logo {
+  position: absolute;
+  width: 1.625rem;
+  height: 1.625rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 7;
+  
+  // Clean subtle engraving
+  filter: 
+    drop-shadow(0 0.0625rem 0 rgba(255, 255, 255, 0.3))
+    brightness(0.75);
+  
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+// VU Label
+.vu-label {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  letter-spacing: 0.0625rem;
+  z-index: 2;
+  text-shadow: 0 0.0625rem 0.0625rem rgba(255, 255, 255, 0.3);
+}
+
+.meter-screw {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.75rem;
+  width: 0.75rem;
+  height: 0.75rem;
+}

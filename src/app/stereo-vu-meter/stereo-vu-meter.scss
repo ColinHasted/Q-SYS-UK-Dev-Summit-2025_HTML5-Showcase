@@ -1,0 +1,367 @@
+@use '../scss/variables' as *;
+
+.stereo-vu-meter {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  height: calc($rack-unit * 2);
+  width: $rack-width;
+  background:
+    /* Subtle surface highlights and shadows */
+    radial-gradient(ellipse 80% 60% at 30% 20%, rgba(255, 255, 255, 0.15), transparent 50%),
+    radial-gradient(ellipse 120% 80% at 70% 80%, rgba(0, 0, 0, 0.1), transparent 60%),
+    /* Panel texture */
+    /* Warm metallic tint */
+    linear-gradient(135deg,
+      rgba(220, 180, 120, 0.3) 0%,
+      rgba(180, 140, 100, 0.2) 30%,
+      rgba(160, 130, 90, 0.1) 70%,
+      rgba(140, 110, 80, 0.15) 100%),
+    /* Main gradient base */
+    linear-gradient(145deg,
+      #e2d3b0 0%,
+      #d4c5a0 25%,
+      #c8b896 50%,
+      #bfb08a 75%,
+      #b5a680 100%);
+
+  border: 0.0625rem solid rgba(0, 0, 0, 0.4);
+  border-radius: 0.5rem;
+  box-shadow:
+    /* Inner bevels for depth */
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+    inset 1px 0 0 rgba(255, 255, 255, 0.15),
+    inset -1px 0 0 rgba(0, 0, 0, 0.2),
+    /* Outer shadow */
+    0 0.5rem 1rem rgba(0, 0, 0, 0.3),
+    0 2rem 4rem rgba(0, 0, 0, 0.1);
+
+
+
+  &__rack-ear {
+    height: calc($rack-unit * 2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: calc(0.25rem - $screw-radius);
+    position: relative;
+
+    &--left {
+      align-items: flex-start;
+      padding-left: calc($rail-centerline - $screw-radius);
+    }
+
+    &--right {
+      align-items: flex-end;
+      padding-right: calc($rail-centerline - $screw-radius);
+    }
+  }
+
+  &__chassis {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+
+
+    justify-content: center;
+    padding: 1.5rem 1rem;
+    width: 100%;
+  }
+
+
+
+}
+
+.vu-meter-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 1rem;
+}
+
+.channel-labels {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin-bottom: 0.5rem;
+}
+
+.channel-label {
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  letter-spacing: 1px;
+}
+
+.vu-meters-container {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 100%;
+}
+
+.vu-meter {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vu-meter-frame {
+  position: relative;
+  width: 140px;
+  height: 100px;
+  background:
+    /* Metal rim highlights */
+    radial-gradient(ellipse 120% 60% at 20% 15%, rgba(255, 255, 255, 0.08), transparent 40%),
+    radial-gradient(ellipse 100% 80% at 80% 85%, rgba(0, 0, 0, 0.15), transparent 50%),
+    /* Brushed metal texture */
+    repeating-linear-gradient(45deg,
+      rgba(255, 255, 255, 0.02) 0,
+      rgba(255, 255, 255, 0.02) 0.0625rem,
+      transparent 0.0625rem,
+      transparent 0.125rem),
+    /* Base metallic gradient */
+    linear-gradient(145deg,
+      #3a3a3a 0%,
+      #2a2a2a 30%,
+      #1a1a1a 70%,
+      #151515 100%);
+
+  border: 1px solid #0a0a0a;
+  border-radius: 4px;
+  padding: 8px;
+  box-shadow:
+    /* Outer depth */
+    0 3px 6px rgba(0, 0, 0, 0.6),
+    0 1px 2px rgba(0, 0, 0, 0.8),
+    /* Inner rim highlights */
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.7),
+    inset 1px 0 0 rgba(255, 255, 255, 0.08),
+    inset -1px 0 0 rgba(0, 0, 0, 0.5);
+}
+
+.meter-screw {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background:
+    radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.25), transparent 45%),
+    radial-gradient(circle at 75% 75%, rgba(0, 0, 0, 0.35), transparent 55%),
+    radial-gradient(circle, #777, #555, #333, #222);
+  border-radius: 50%;
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.4),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.6),
+    0 1px 3px rgba(0, 0, 0, 0.4),
+    0 0 1px rgba(0, 0, 0, 0.8);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 1px;
+    background: linear-gradient(90deg, #111, #222, #111);
+    transform: translate(-50%, -50%);
+    border-radius: 0.5px;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1px;
+    height: 6px;
+    background: linear-gradient(180deg, #111, #222, #111);
+    transform: translate(-50%, -50%);
+    border-radius: 0.5px;
+  }
+}
+
+.vu-meter-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background:
+    /* Subtle aging and wear */
+    radial-gradient(ellipse 150% 100% at 30% 30%, rgba(200, 180, 160, 0.1), transparent 60%),
+    radial-gradient(ellipse 100% 120% at 70% 70%, rgba(160, 140, 120, 0.08), transparent 50%),
+    /* Paper texture */
+    repeating-linear-gradient(90deg,
+      rgba(0, 0, 0, 0.008) 0,
+      rgba(0, 0, 0, 0.008) 0.0625rem,
+      transparent 0.0625rem,
+      transparent 0.375rem),
+    repeating-linear-gradient(0deg,
+      rgba(255, 255, 255, 0.01) 0,
+      rgba(255, 255, 255, 0.01) 0.03125rem,
+      transparent 0.03125rem,
+      transparent 0.1875rem),
+    /* Vintage cream gradient */
+    linear-gradient(135deg,
+      #f8f3eb 0%,
+      #f5f0e8 20%,
+      #f0ebe3 40%,
+      #e8ddd0 60%,
+      #e0d5c8 80%,
+      #d8cdc0 100%);
+
+  border: 1px solid #4a4a4a;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 0.5rem rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.scale-markings {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  .scale-mark {
+    position: absolute;
+    font-family: 'Arial', sans-serif;
+    font-size: 7px;
+    font-weight: bold;
+    color: #333;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 1px;
+      height: 4px;
+      background: #333;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &.major::before {
+      height: 6px;
+      width: 1px;
+      top: -8px;
+    }
+
+    &.red {
+      color: #d32f2f;
+
+      &::before {
+        background: #d32f2f;
+      }
+    }
+
+    // Position scale marks along the arc (adjusted for smaller size)
+    &[data-db="-20"] {
+      top: 14px;
+      left: 8px;
+    }
+
+    &[data-db="-10"] {
+      top: 8px;
+      left: 22px;
+    }
+
+    &[data-db="0"] {
+      top: 5px;
+      left: 42px;
+    }
+
+    &[data-db="4"] {
+      top: 6px;
+      left: 55px;
+    }
+
+    &[data-db="5"] {
+      top: 7px;
+      left: 62px;
+    }
+
+    &[data-db="7"] {
+      top: 9px;
+      left: 72px;
+    }
+
+    &[data-db="10"] {
+      top: 12px;
+      left: 82px;
+    }
+
+    &[data-db="3"] {
+      top: 16px;
+      left: 90px;
+    }
+
+    &[data-db="+3"] {
+      top: 20px;
+      left: 98px;
+    }
+  }
+}
+
+.vu-label {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  letter-spacing: 1px;
+}
+
+.needle-pivot {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, #666, #333);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.needle {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  width: 1px;
+  height: 45px;
+  background: linear-gradient(to top, #333, #d32f2f);
+  transform-origin: bottom center;
+  transform: translateX(-50%) rotate(-45deg);
+  z-index: 2;
+  border-radius: 1px;
+  transition: transform 0.1s ease-out;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    width: 3px;
+    height: 3px;
+    background: #d32f2f;
+    transform: translateX(-50%) rotate(45deg);
+    clip-path: polygon(0 100%, 50% 0, 100% 100%);
+  }
+}
